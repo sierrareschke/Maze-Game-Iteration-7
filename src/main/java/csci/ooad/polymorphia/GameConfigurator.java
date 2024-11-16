@@ -1,5 +1,8 @@
 package csci.ooad.polymorphia;
 
+import csci.ooad.polymorphia.maze.Maze;
+import groovyjarjarpicocli.CommandLine;
+
 public class GameConfigurator {
     static int SECONDS_TO_PAUSE_BETWEEN_TURNS = 1;
 

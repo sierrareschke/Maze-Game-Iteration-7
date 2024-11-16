@@ -50,6 +50,11 @@ public class CharacterFactory {
         //return new Character(name, character -> new NoOpCommand()); // "Do nothing" for non-Demon creatures
     }
 
+    public static Character createHuman(String name, Optional<Double> healthInput) {
+        Double health = healthInput.orElse(DEFAULT_INITIAL_HEALTH);
+        return new Character(name, health, new HumanFightStrategy(), new HumanEatStrategy(), new DefaultMoveStrategy(), CharacterType.Human);
+    }
+
     // Create many of each character type
     public static List<Character> createNumberOfAdventurers(int numAdventurers) {
         return IntStream.range(0, numAdventurers)

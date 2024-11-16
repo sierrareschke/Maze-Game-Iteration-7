@@ -6,5 +6,6 @@ public enum CharacterType {
     Glutton,
     Knight,
     Demon,
-    Creature
+    Creature,
+    Human
 }
