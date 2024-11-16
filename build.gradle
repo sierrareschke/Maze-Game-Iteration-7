@@ -12,6 +12,8 @@ repositories {
 
 dependencies {
     implementation 'ch.qos.logback:logback-classic:1.4.14'
+    implementation 'commons-cli:commons-cli:1.6.0'
+
 
     // Maze display
     implementation files('libs/csci4448.gameLayout-2.0.0.jar')

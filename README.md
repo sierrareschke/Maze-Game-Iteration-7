@@ -1,15 +1,28 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/MktpU50_)
-# OOAD Homework 7:
-## Refactoring with Strategy and Command Patterns
-#### (45 points)
+# OOAD Homework 8:
+## Extending Polymorphia with a Decorator pattern and Human player
+#### (55 points)
 
-TODO:
-- If adventurers are in the room with the Demon, the Demon will fight the healthiest one
-- If no adventurers are in the room, the Demon will move to a random neighboring room
-- Use the Strategy Pattern to inject behavior into the Adventurer class so that we can create Characters that behave like our previous subclasses of Knight, Glutton, and Coward.
-- Use the Strategy Pattern to do the same with Demon subclass of Creature.
-- Use the Command Pattern to return the action to execute from the Strategy Pattern classes
-- Use the Factory Pattern to create the Command objects
+High Level TODOs:
+- Create a static main
+- Use the Decorator Pattern to implement Armor
+- Create and place Armor (5 points)
+- ArtifactFactory (5 points)
+- ArmoredCharacter (15 points)
+- Create Random Strategy (5 points)
+- Create Human Strategy (15 points)
+- Create a Command-line Interface in a static main method (10 points)
+
+Armor and the Decorator Pattern
+- Knights can now wear armor
+- If the character loses a fight, it will lose 1 less health point because the armor protects them.
+- There is no limit to the number of armored suits a character can wear, but make sure that an armored character cannot gain health if they lose a fight.
+An armored character loses 0.1 more health points (per armored suit worn) when it moves, due to the weight of the armor.
+
+Create a Random Strategy
+- Create a strategy that will randomly select an action from all the possible actions for the character in their current circumstances (room). Make this the default strategy for Adventurers (not knights, gluttons, or cowards).
+
+
 
 ### Introduction
 #### Team Members: 
@@ -18,9 +31,7 @@ Grace Ohlsen, Sierra Reschke and Nolan Brady
 #### Java Version: 21
 
 #### Comments/Assumptions: 
-We made the assumption that the flow of strategies would go fight, eat and move in terms of priority. All the tests passed therefore I think the logic stands.
-We reworked the NoFood Exceptions to avoid having to pass the exception throwing up the method stack. This also passed in tests.
-We also created strategies for different characters when there were variances in their movements as this seemed to be the cleanest approach to the different logic.
+-- TODO --
 
 
 ## Test Coverage
