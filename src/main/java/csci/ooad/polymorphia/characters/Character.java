@@ -42,6 +42,17 @@ public class Character implements Comparable<Character> {
         this.type = type;
     }
 
+    // TODO - Make sure this is the correct way to incorporate the decorator pattern
+    public Character(Character character) {
+        this.fightStrategy = character.getFightStrategy();
+        this.eatStrategy = character.getEatStrategy();
+        this.moveStrategy = character.getMoveStrategy();
+        this.health = character.getHealth();
+        this.name = character.getName();
+        this.currentLocation = character.getCurrentLocation();
+        this.type = character.type;
+    }
+
     public EatStrategy getEatStrategy() {
         return eatStrategy;
     }
