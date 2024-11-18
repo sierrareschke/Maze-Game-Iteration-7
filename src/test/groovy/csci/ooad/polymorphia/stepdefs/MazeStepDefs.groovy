@@ -1,6 +1,6 @@
 package csci.ooad.polymorphia.stepdefs
 
-import csci.ooad.polymorphia.Food
+import csci.ooad.polymorphia.artifacts.Food
 import csci.ooad.polymorphia.maze.Maze
 import csci.ooad.polymorphia.Polymorphia
 import csci.ooad.polymorphia.maze.Room

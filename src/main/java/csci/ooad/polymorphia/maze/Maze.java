@@ -1,7 +1,9 @@
 package csci.ooad.polymorphia.maze;
 
-import csci.ooad.polymorphia.Food;
-import csci.ooad.polymorphia.FoodFactory;
+import csci.ooad.polymorphia.artifacts.Armor;
+import csci.ooad.polymorphia.artifacts.ArtifactFactory;
+import csci.ooad.polymorphia.artifacts.Food;
+import csci.ooad.polymorphia.artifacts.FoodFactory;
 import csci.ooad.polymorphia.NoSuchRoomException;
 import csci.ooad.polymorphia.characters.Character;
 import csci.ooad.polymorphia.characters.CharacterFactory;
@@ -21,8 +23,8 @@ public class Maze {
         return new Builder();
     }
 
-    public static Builder getNewBuilder(CharacterFactory characterFactory, FoodFactory foodFactory) {
-        return new Builder(characterFactory, foodFactory);
+    public static Builder getNewBuilder(CharacterFactory characterFactory, ArtifactFactory artifactFactory) {
+        return new Builder(characterFactory, artifactFactory);
     }
 
     public int size() {
@@ -107,18 +109,18 @@ public class Maze {
 
 
         private final CharacterFactory characterFactory;
-        final private FoodFactory foodFactory;
+        final private ArtifactFactory artifactFactory;
         private final Maze maze = new Maze();
         private final Map<String, Room> roomMap = new HashMap<>();
         private Boolean distributeSequentially = false;
         private int currentRoomIndex = -1;  // This is incremented before any use
 
         Builder() {
-            this(new CharacterFactory(), new FoodFactory());
+            this(new CharacterFactory(), new ArtifactFactory());
         }
-        private Builder(CharacterFactory characterFactory, FoodFactory foodFactory) {
+        private Builder(CharacterFactory characterFactory, ArtifactFactory artifactFactory) {
             this.characterFactory = characterFactory;
-            this.foodFactory = foodFactory;
+            this.artifactFactory = artifactFactory;
         }
 
         private static String[] createRoomNames(Integer numRooms) {
@@ -303,15 +305,22 @@ public class Maze {
 
         public Builder createAndAddFoodItems(String... foodNames) {
             for (String foodName : foodNames) {
-                nextRoom().add(foodFactory.create(foodName));
+                nextRoom().add(artifactFactory.createFood(foodName));
             }
             return this;
         }
 
         public Builder createAndAddFoodItems(Integer numItems) {
-            List<Food> foodItems = foodFactory.createNumberOf(numItems);
+            List<Food> foodItems = artifactFactory.createNumFoods(numItems);
             for (Food food : foodItems) {
                 nextRoom().add(food);
+            }
+            return this;
+        }
+
+        public Builder createAndAddArmor(String... armorNames) {
+            for(String armorName : armorNames) {
+                nextRoom().add(artifactFactory.createArmor(armorName));
             }
             return this;
         }
@@ -330,6 +339,11 @@ public class Maze {
 
         public Builder addToRoom(String roomName, Food foodItem) {
             roomMap.get(roomName).add(foodItem);
+            return this;
+        }
+
+        public Builder addToRoom(String roomName, Armor armorItem) {
+            roomMap.get(roomName).add(armorItem);
             return this;
         }
 

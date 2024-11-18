@@ -1,5 +1,6 @@
 package csci.ooad.polymorphia;
 
+import csci.ooad.polymorphia.artifacts.FoodFactory;
 import csci.ooad.polymorphia.characters.Character;
 import csci.ooad.polymorphia.characters.CharacterFactory;
 import csci.ooad.polymorphia.maze.Maze;

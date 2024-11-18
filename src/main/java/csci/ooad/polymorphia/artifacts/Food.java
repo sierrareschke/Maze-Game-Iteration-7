@@ -1,4 +1,4 @@
-package csci.ooad.polymorphia;
+package csci.ooad.polymorphia.artifacts;
 
 import java.text.DecimalFormat;
 

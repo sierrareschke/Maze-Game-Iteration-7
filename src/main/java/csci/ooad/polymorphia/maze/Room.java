@@ -1,7 +1,9 @@
 package csci.ooad.polymorphia.maze;
 
 import csci.ooad.polymorphia.Die;
-import csci.ooad.polymorphia.Food;
+import csci.ooad.polymorphia.NoArmorException;
+import csci.ooad.polymorphia.artifacts.Armor;
+import csci.ooad.polymorphia.artifacts.Food;
 import csci.ooad.polymorphia.NoFoodException;
 
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ public class Room {
     private List<Room> neighbors = new ArrayList<>();
     private List<Character> characters = new ArrayList<>();
     private List<Food> foodItems = new ArrayList<>();
+    private List<Armor> armor = new ArrayList<>();
 
     public Room(String name) {
         this.name = name;
@@ -28,6 +31,10 @@ public class Room {
 
     public List<Food> getFoodItems() {
         return foodItems;
+    }
+
+    public List<Armor> getArmor() {
+        return armor;
     }
 
     public List<Character> getLivingAdventurers() {
@@ -129,6 +136,10 @@ public class Room {
         foodItems.add(foodItem);
     }
 
+    public void add(Armor newArmor){
+        armor.add(newArmor);
+    }
+
     public Character getHealthiestAdventurer() {
         return getLivingAdventurers().stream().max(Comparator.naturalOrder()).orElse(null);
     }
@@ -141,11 +152,22 @@ public class Room {
         return !foodItems.isEmpty();
     }
 
+    public boolean hasArmor() {
+        return !armor.isEmpty();
+    }
+
     public Food removeFoodItem() {
         if (foodItems.isEmpty()) {
             throw new NoFoodException("No food in room");
         }
         return foodItems.removeFirst();
+    }
+
+    public Armor removeArmor() {
+        if(armor.isEmpty()) {
+            throw new NoArmorException("No armor in room");
+        }
+        return armor.removeFirst();
     }
 
     public Boolean hasDemon() {
