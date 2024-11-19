@@ -133,6 +133,10 @@ public class Character implements Comparable<Character> {
     public Boolean isAdventurer() {
         return type == CharacterType.Adventurer;
     }
+    public Boolean isHuman(){
+        return type == CharacterType.Human;
+    }
+
     public Boolean isCreature() {
         return type == CharacterType.Creature;
     }

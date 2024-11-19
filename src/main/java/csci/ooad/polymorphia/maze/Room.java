@@ -90,16 +90,14 @@ public class Room {
 
     public Boolean hasLivingCreatures() {
         return characters.stream()
-                .filter(Character::isCreature)
-                .filter(Character::isAlive)
-                .anyMatch(Character::isAlive);
+                .anyMatch(character -> character.isAlive() &&
+                        (character.isDemon() || character.isCreature()));
     }
 
     public Boolean hasLivingAdventurers() {
         return characters.stream()
-                .filter(Character::isAdventurer)
-                .filter(Character::isAlive)
-                .anyMatch(Character::isAlive);
+                .anyMatch(character -> character.isAlive() &&
+                        (character.isHuman() || character.isAdventurer() || character.isCoward() || character.isKnight() || character.isGlutton()));
     }
 
     public Boolean hasLivingCoward() {

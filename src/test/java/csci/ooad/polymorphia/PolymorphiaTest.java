@@ -151,6 +151,25 @@ public class PolymorphiaTest {
     }
 
     @Test
+    void testMazeWithHuman() throws NoSuchRoomException {
+        Maze maze = Maze.getNewBuilder(new CharacterFactory(), new ArtifactFactory())
+                .create3x3Grid()
+                .distributeRandomly()
+                .createAndAddHuman("Human")
+                .createAndAddKnights("Sir Galahad")
+                .createAndAddGluttons("Chubs")
+                .createAndAddCowards("Sir Robin")
+                .createAndAddCreatures("Ogre")
+                .createAndAddFoodItems("Popcorn")
+                .build();
+
+        Polymorphia game = new Polymorphia(maze);
+        game.play();
+
+        assertTrue(game.isOver());
+    }
+
+    @Test
     void testSequentialDistribution() {
         Maze maze = Maze.getNewBuilder()
                 .createFullyConnectedRooms(4)
