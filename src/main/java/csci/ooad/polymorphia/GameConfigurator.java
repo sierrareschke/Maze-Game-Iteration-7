@@ -1,10 +1,8 @@
 package csci.ooad.polymorphia;
 
 import csci.ooad.polymorphia.maze.Maze;
-import groovyjarjarpicocli.CommandLine;
 import org.apache.commons.cli.*;
-
-import java.text.ParseException;
+import org.apache.commons.cli.ParseException;
 import java.util.Arrays;
 
 public class GameConfigurator {
@@ -110,7 +108,7 @@ public class GameConfigurator {
         options.addOption(numDemons);
         options.addOption(numFoodItems);
         options.addOption(humanPlayer);
-        options.addOption(numArmoredSuits);
+        // options.addOption(numArmoredSuits);
         options.addOption(numRooms);
 
 

@@ -1,5 +1,5 @@
 package csci.ooad.polymorphia;
-import csci.ooad.polymorphia.artifacts.FoodFactory;
+import csci.ooad.polymorphia.artifacts.ArtifactFactory;
 import csci.ooad.polymorphia.characters.Character;
 import csci.ooad.polymorphia.characters.CharacterFactory;
 
@@ -132,7 +132,7 @@ public class PolymorphiaTest {
 
     @Test
     void testUseOfFactories() throws NoSuchRoomException {
-        Maze maze = Maze.getNewBuilder(new CharacterFactory(), new FoodFactory())
+        Maze maze = Maze.getNewBuilder(new CharacterFactory(), new ArtifactFactory())
                 .createRoom("initial")
                 .createAndAddAdventurers("Frodo")
                 .createAndAddKnights("Sir Galahad")
