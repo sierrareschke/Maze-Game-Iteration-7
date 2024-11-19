@@ -108,7 +108,7 @@ public class GameConfigurator {
         options.addOption(numDemons);
         options.addOption(numFoodItems);
         options.addOption(humanPlayer);
-        // options.addOption(numArmoredSuits);
+        options.addOption(armoredSuits);
         options.addOption(numRooms);
 
 
