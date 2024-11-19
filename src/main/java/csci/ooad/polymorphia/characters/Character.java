@@ -1,19 +1,18 @@
 package csci.ooad.polymorphia.characters;
 
-import csci.ooad.polymorphia.Die;
-import csci.ooad.polymorphia.EventBus;
-import csci.ooad.polymorphia.EventType;
-import csci.ooad.polymorphia.NoFoodException;
+import csci.ooad.polymorphia.*;
 import csci.ooad.polymorphia.command.Command;
 import csci.ooad.polymorphia.maze.Room;
 import csci.ooad.polymorphia.strategy.EatStrategy;
 import csci.ooad.polymorphia.strategy.FightStrategy;
+import csci.ooad.polymorphia.strategy.HumanPromptStrategy;
 import csci.ooad.polymorphia.strategy.MoveStrategy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.text.DecimalFormat;
+import java.util.Optional;
 
 import static csci.ooad.polymorphia.EventBus.post;
 
@@ -25,6 +24,7 @@ public class Character implements Comparable<Character> {
     private static Logger logger = LoggerFactory.getLogger(Character.class);
     private static DecimalFormat formatter = new DecimalFormat("0.0");
     protected String name;
+    private HumanPromptStrategy humanPromptStrategy;
     private FightStrategy fightStrategy;
     private EatStrategy eatStrategy;
     private MoveStrategy moveStrategy;
@@ -40,6 +40,16 @@ public class Character implements Comparable<Character> {
         this.eatStrategy = eatStrategy;
         this.moveStrategy = moveStrategy;
         this.type = type;
+    }
+
+    public Character(String name, Double initialHealth, FightStrategy fightStrategy, EatStrategy eatStrategy, MoveStrategy moveStrategy, HumanPromptStrategy humanPromptStrategy, CharacterType type) {
+        this.name = name;
+        this.health = initialHealth;
+        this.fightStrategy = fightStrategy;
+        this.eatStrategy = eatStrategy;
+        this.moveStrategy = moveStrategy;
+        this.type = type;
+        this.humanPromptStrategy = humanPromptStrategy;
     }
 
     // TODO - Make sure this is the correct way to incorporate the decorator pattern
@@ -123,6 +133,10 @@ public class Character implements Comparable<Character> {
     public Boolean isAdventurer() {
         return type == CharacterType.Adventurer;
     }
+    public Boolean isHuman(){
+        return type == CharacterType.Human;
+    }
+
     public Boolean isCreature() {
         return type == CharacterType.Creature;
     }
@@ -141,34 +155,32 @@ public class Character implements Comparable<Character> {
 
     public void doAction() {
         try {
-            Command fight = fightStrategy.fight(this);
-            Command eat = eatStrategy.eat(this);
-            Command move = moveStrategy.move(this);
-            if (fight != null) {
-                fight.execute();
-            } else if (eat != null) {
-                eat.execute();
-            }else if (move != null) {
-                move.execute();
+            // If it's a human player handle the action through prompting
+            if (this.type == CharacterType.Human) {
+                Optional<HumanOption> selection = this.humanPromptStrategy.prompt(this);
+                if (selection.isPresent()) {
+                    HumanOption humanOption = selection.get();
+                    if (humanOption.value() == 1) this.eatStrategy.eat(this);
+                    if(humanOption.value() == 2) this.fightStrategy.fight(this);
+                    if(humanOption.value() == 3) this.moveStrategy.move(this);
+                }
+            } else {
+                // If they're a fake robot then just keep going
+                Command fight = fightStrategy.fight(this);
+                Command eat = eatStrategy.eat(this);
+                Command move = moveStrategy.move(this);
+                if (fight != null) {
+                    fight.execute();
+                } else if (eat != null) {
+                    eat.execute();
+                }else if (move != null) {
+                    move.execute();
+                }
             }
         } catch (NoFoodException e) {
             throw new RuntimeException(e);
         }
     }
-
-//    protected void move() {
-//        Room nextLocation = getCurrentLocation().getRandomNeighbor();
-//        if (nextLocation != null) {
-//            String message = getName() + " moved from " + getCurrentLocation().getName() + " to " + nextLocation.getName();
-//            logger.info(message);
-//            post(EventType.Moved, message);
-//            nextLocation.enter(this);
-//            loseHealth(HEALTH_LOST_IN_MOVING_ROOMS);
-//        } else {
-//            logger.warn("{} has no neighbors!", getCurrentLocation().getName());
-//        }
-//    }
-
 
     public void gainHealth(double healthValue) {
         this.health += healthValue;

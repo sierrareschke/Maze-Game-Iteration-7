@@ -18,13 +18,13 @@ public class ArmorDecorator extends Character {
         return character.getName();
     }
 
-    @Override
-    public int getHealth() {
-        return character.getHealth();
-    }
-
-    @Override
-    public int getEffectiveDefense() {
-        return character.getEffectiveDefense() + armor.getDefense();
-    }
+//    @Override
+//    public int getHealth() {
+//        return character.getHealth();
+//    }
+//
+//    @Override
+//    public int getEffectiveDefense() {
+//        return character.getEffectiveDefense() + armor.getDefense();
+//    }
 }

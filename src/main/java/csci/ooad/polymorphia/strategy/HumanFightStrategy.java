@@ -9,9 +9,9 @@ public class HumanFightStrategy implements FightStrategy {
 
     @Override
     public Command fight(Character human) {
-        System.out.println("Human fight");
-        // Do something here
-       return null;
+        Room currentRoom = human.getCurrentLocation();
+        Character creature = currentRoom.getHealthiestCreature();
+       return CommandFactory.createFightCommand(human, creature);
     }
 }
 
