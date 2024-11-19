@@ -1,9 +1,6 @@
 package csci.ooad.polymorphia.characters;
 
-import csci.ooad.polymorphia.Die;
-import csci.ooad.polymorphia.EventBus;
-import csci.ooad.polymorphia.EventType;
-import csci.ooad.polymorphia.NoFoodException;
+import csci.ooad.polymorphia.*;
 import csci.ooad.polymorphia.command.Command;
 import csci.ooad.polymorphia.maze.Room;
 import csci.ooad.polymorphia.strategy.EatStrategy;
@@ -15,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.text.DecimalFormat;
+import java.util.Optional;
 
 import static csci.ooad.polymorphia.EventBus.post;
 
@@ -153,15 +151,27 @@ public class Character implements Comparable<Character> {
 
     public void doAction() {
         try {
-            Command fight = fightStrategy.fight(this);
-            Command eat = eatStrategy.eat(this);
-            Command move = moveStrategy.move(this);
-            if (fight != null) {
-                fight.execute();
-            } else if (eat != null) {
-                eat.execute();
-            }else if (move != null) {
-                move.execute();
+            // If it's a human player handle the action through prompting
+            if (this.type == CharacterType.Human) {
+                Optional<HumanOption> selection = this.humanPromptStrategy.prompt(this);
+                if (selection.isPresent()) {
+                    HumanOption humanOption = selection.get();
+                    if (humanOption.value() == 1) this.eatStrategy.eat(this);
+                    if(humanOption.value() == 2) this.fightStrategy.fight(this);
+                    if(humanOption.value() == 3) this.moveStrategy.move(this);
+                }
+            } else {
+                // If they're a fake robot then just keep going
+                Command fight = fightStrategy.fight(this);
+                Command eat = eatStrategy.eat(this);
+                Command move = moveStrategy.move(this);
+                if (fight != null) {
+                    fight.execute();
+                } else if (eat != null) {
+                    eat.execute();
+                }else if (move != null) {
+                    move.execute();
+                }
             }
         } catch (NoFoodException e) {
             throw new RuntimeException(e);
