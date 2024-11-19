@@ -1,7 +1,10 @@
 package csci.ooad.polymorphia.strategy;
+import csci.ooad.polymorphia.HumanOption;
 import csci.ooad.polymorphia.characters.Character;
-import csci.ooad.polymorphia.command.Command;
+
+import javax.swing.text.html.Option;
+import java.util.Optional;
 
 public interface HumanStrategy {
-    Command prompt(Character character);
+    Optional<HumanOption> prompt(Character character);
 }

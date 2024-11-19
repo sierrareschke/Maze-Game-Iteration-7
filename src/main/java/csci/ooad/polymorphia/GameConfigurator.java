@@ -1,8 +1,10 @@
 package csci.ooad.polymorphia;
 
 import csci.ooad.polymorphia.maze.Maze;
+import groovyjarjarpicocli.CommandLine;
 import org.apache.commons.cli.*;
 
+import java.text.ParseException;
 import java.util.Arrays;
 
 public class GameConfigurator {
@@ -29,59 +31,6 @@ public class GameConfigurator {
             System.exit(1); // error
         }
         System.exit(0);
-    }
-
-    // TODO - default values for others?
-    void buildMazeFromArguments(CommandLine cmdLine) throws ParseException {
-        int numRooms = 6; // Default number of rooms
-        if (cmdLine.hasOption("r")) {
-            numRooms = ((Number) cmdLine.getParsedOptionValue("r")).intValue();
-            mazeBuilder.createFullyConnectedRooms(numRooms);
-        }
-
-        if (cmdLine.hasOption("a")) {
-            int numAdventurers = ((Number) cmdLine.getParsedOptionValue("a")).intValue();
-            mazeBuilder.createAndAddAdventurers(numAdventurers);
-        }
-
-        if (cmdLine.hasOption("c")) {
-            int numCreatures = ((Number) cmdLine.getParsedOptionValue("c")).intValue();
-            mazeBuilder.createAndAddCreatures(numCreatures);
-        }
-
-        if (cmdLine.hasOption("d")) {
-            int numDemons = ((Number) cmdLine.getParsedOptionValue("d")).intValue();
-            mazeBuilder.createAndAddDemons(numDemons);
-        }
-
-        int numFoodItems = 6;
-        if (cmdLine.hasOption("f")) {
-            numFoodItems = ((Number) cmdLine.getParsedOptionValue("f")).intValue();
-            mazeBuilder.createAndAddFoodItems(numFoodItems);
-        }
-
-//        int numKnights = 2;
-        if (cmdLine.hasOption("m")) {
-            int numKnights = ((Number) cmdLine.getParsedOptionValue("m")).intValue();
-            mazeBuilder.createAndAddKnights(numKnights);
-        }
-
-        if (cmdLine.hasOption("m")) {
-            String armorList = cmdLine.getOptionValue("m");
-            String[] armorArray = armorList.split(","); // Split by commas
-            mazeBuilder.createAndAddArmor(String.valueOf(Arrays.asList(armorArray)));
-        }
-
-        if (cmdLine.hasOption("h")) {
-            String humanPlayerName = cmdLine.getOptionValue("h");
-            mazeBuilder.createAndAddAdventurers(humanPlayerName); // TODO - is human player an adventurer ?
-        }
-    }
-
-
-    public void createAndStartGame() {
-        Polymorphia polymorphia = new Polymorphia(mazeBuilder.build());
-        polymorphia.play();
     }
 
     static Options getOptions() {
@@ -166,5 +115,57 @@ public class GameConfigurator {
 
 
         return options;
+    }
+
+    // TODO - default values for others?
+    void buildMazeFromArguments(CommandLine cmdLine) throws ParseException {
+        int numRooms = 6; // Default number of rooms
+        if (cmdLine.hasOption("r")) {
+            numRooms = ((Number) cmdLine.getParsedOptionValue("r")).intValue();
+            mazeBuilder.createFullyConnectedRooms(numRooms);
+        }
+
+        if (cmdLine.hasOption("a")) {
+            int numAdventurers = ((Number) cmdLine.getParsedOptionValue("a")).intValue();
+            mazeBuilder.createAndAddAdventurers(numAdventurers);
+        }
+
+        if (cmdLine.hasOption("c")) {
+            int numCreatures = ((Number) cmdLine.getParsedOptionValue("c")).intValue();
+            mazeBuilder.createAndAddCreatures(numCreatures);
+        }
+
+        if (cmdLine.hasOption("d")) {
+            int numDemons = ((Number) cmdLine.getParsedOptionValue("d")).intValue();
+            mazeBuilder.createAndAddDemons(numDemons);
+        }
+
+        int numFoodItems = 6;
+        if (cmdLine.hasOption("f")) {
+            numFoodItems = ((Number) cmdLine.getParsedOptionValue("f")).intValue();
+            mazeBuilder.createAndAddFoodItems(numFoodItems);
+        }
+
+//        int numKnights = 2;
+        if (cmdLine.hasOption("m")) {
+            int numKnights = ((Number) cmdLine.getParsedOptionValue("m")).intValue();
+            mazeBuilder.createAndAddKnights(numKnights);
+        }
+
+        if (cmdLine.hasOption("m")) {
+            String armorList = cmdLine.getOptionValue("m");
+            String[] armorArray = armorList.split(","); // Split by commas
+            mazeBuilder.createAndAddArmor(String.valueOf(Arrays.asList(armorArray)));
+        }
+
+        if (cmdLine.hasOption("h")) {
+            String humanPlayerName = cmdLine.getOptionValue("h");
+            mazeBuilder.createAndAddAdventurers(humanPlayerName); // TODO - is human player an adventurer ?
+        }
+    }
+
+    public void createAndStartGame() {
+        Polymorphia polymorphia = new Polymorphia(mazeBuilder.build());
+        polymorphia.play();
     }
 }
