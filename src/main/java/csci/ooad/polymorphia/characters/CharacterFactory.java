@@ -49,9 +49,8 @@ public class CharacterFactory {
         return new Character(name, health, new CreatureFightStrategy(), new CreatureEatStrategy(), new NoMoveStrategy(), CharacterType.Creature);
         //return new Character(name, character -> new NoOpCommand()); // "Do nothing" for non-Demon creatures
     }
-
-    public static Character createHuman(String name, Optional<Double> healthInput) {
-        Double health = healthInput.orElse(DEFAULT_INITIAL_HEALTH);
+    public static Character createHuman(String name) {
+        Double health = DEFAULT_INITIAL_HEALTH;
         return new Character(name, health, new HumanFightStrategy(), new HumanEatStrategy(), new DefaultMoveStrategy(), new HumanPromptStrategy(), CharacterType.Human);
     }
 

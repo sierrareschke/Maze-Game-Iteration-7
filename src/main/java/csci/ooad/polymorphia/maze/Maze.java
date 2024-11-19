@@ -3,7 +3,6 @@ package csci.ooad.polymorphia.maze;
 import csci.ooad.polymorphia.artifacts.Armor;
 import csci.ooad.polymorphia.artifacts.ArtifactFactory;
 import csci.ooad.polymorphia.artifacts.Food;
-import csci.ooad.polymorphia.artifacts.FoodFactory;
 import csci.ooad.polymorphia.NoSuchRoomException;
 import csci.ooad.polymorphia.characters.Character;
 import csci.ooad.polymorphia.characters.CharacterFactory;
@@ -248,6 +247,11 @@ public class Maze {
 
         public Builder createAndAddKnights(Integer numKnights) {
             addAdventurers(characterFactory.createNumberOfKnights(numKnights));
+            return this;
+        }
+
+        public Builder createAndAddHuman(String name) {
+            nextRoom().add(characterFactory.createHuman(name));
             return this;
         }
 

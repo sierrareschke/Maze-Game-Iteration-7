@@ -84,6 +84,25 @@ class MazeTest {
         assertTrue(twoRoomMaze.getRoom("final").hasLivingCreatures());
     }
 
+    @Test
+    void testMazeWithHumanPlayer(){
+        Maze maze = Maze.getNewBuilder()
+                .create3x3Grid()
+                .createAndAddAdventurers("Frodo")
+                .createAndAddHuman("Human")
+                .createAndAddFoodItems(5)
+                .createAndAddCreatures("Ogre")
+                .createAndAddCreatures("Dragon")
+                .build();
+
+        String mazeString = maze.toString();
+        logger.info(mazeString);
+
+        assertTrue(mazeString.contains("Northwest"));   // Hard-coded room name for 2x2 grid
+        assertTrue(mazeString.contains("Frodo"));
+        assertTrue(mazeString.contains("Ogre"));
+    }
+
 
     @Test
     void testUseOfFactories() throws NoSuchRoomException {
