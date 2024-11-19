@@ -20,7 +20,8 @@ public class HumanPromptStrategy implements HumanStrategy{
             System.out.print("Enter your option: ");
             Scanner scanner = new Scanner(System.in);
 
-            int choiceNumber = Integer.parseInt(scanner.nextLine()) - 1;
+            int choiceNumber = Integer.parseInt(scanner.nextLine());
+            System.out.println("choiceNumber: " + choiceNumber);
             return options.stream()
                     .filter(option -> option.value() == choiceNumber)
                     .findFirst();

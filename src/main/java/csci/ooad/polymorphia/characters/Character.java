@@ -133,47 +133,102 @@ public class Character implements Comparable<Character> {
     public Boolean isAdventurer() {
         return type == CharacterType.Adventurer;
     }
-    public Boolean isHuman(){
+
+    public Boolean isHuman() {
         return type == CharacterType.Human;
     }
 
     public Boolean isCreature() {
         return type == CharacterType.Creature;
     }
+
     public Boolean isDemon() {
         return type == CharacterType.Demon;
     }
+
     public Boolean isCoward() {
         return type == CharacterType.Coward;
     }
+
     public Boolean isKnight() {
         return type == CharacterType.Knight;
     }
+
     public Boolean isGlutton() {
         return type == CharacterType.Glutton;
     }
 
+//    public void doAction() {
+//        try {
+//            // If it's a human player handle the action through prompting
+//            if (this.type == CharacterType.Human) {
+//                Optional<HumanOption> selection = this.humanPromptStrategy.prompt(this);
+//                System.out.println("selection: " + selection);
+//                if (selection.isPresent()) {
+//                    HumanOption humanOption = selection.get();
+//                    if (humanOption.value() == 1) this.eatStrategy.eat(this);
+//                    if(humanOption.value() == 2) this.fightStrategy.fight(this);
+//                    if(humanOption.value() == 3) this.moveStrategy.move(this);//
+//                }
+//            } else {
+//                // If they're a fake robot then just keep going
+//                Command fight = fightStrategy.fight(this);
+//                Command eat = eatStrategy.eat(this);
+//                Command move = moveStrategy.move(this);
+//                if (fight != null) {
+//                    fight.execute();
+//                } else if (eat != null) {
+//                    eat.execute();
+//                }else if (move != null) {
+//                    move.execute();
+//                }
+//            }
+//        } catch (NoFoodException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+
     public void doAction() {
         try {
-            // If it's a human player handle the action through prompting
+            // If it's a human player, handle the action through prompting
             if (this.type == CharacterType.Human) {
                 Optional<HumanOption> selection = this.humanPromptStrategy.prompt(this);
+                // TODO - need to make sure to only prompt/allow action if applicable (i.e. right now can eat when no food present)
+                System.out.println("Selection: " + selection);
+
                 if (selection.isPresent()) {
                     HumanOption humanOption = selection.get();
-                    if (humanOption.value() == 1) this.eatStrategy.eat(this);
-                    if(humanOption.value() == 2) this.fightStrategy.fight(this);
-                    if(humanOption.value() == 3) this.moveStrategy.move(this);
+                    Command command = null;
+
+                    // Determine the command based on the selected option
+                    if (humanOption.value() == 1) {
+                        command = this.eatStrategy.eat(this);
+                    } else if (humanOption.value() == 2) {
+                        command = this.fightStrategy.fight(this);
+                    } else if (humanOption.value() == 3) {
+                        command = this.moveStrategy.move(this);
+                    }
+                    // TODO - add option to put on armor
+
+
+                    // Execute the command if it is not null
+                    if (command != null) {
+                        command.execute();
+                    } else {
+                        System.out.println("No valid action could be performed for the selected option.");
+                    }
                 }
             } else {
-                // If they're a fake robot then just keep going
+                // For non-human characters, execute strategies directly
                 Command fight = fightStrategy.fight(this);
                 Command eat = eatStrategy.eat(this);
                 Command move = moveStrategy.move(this);
+
                 if (fight != null) {
                     fight.execute();
                 } else if (eat != null) {
                     eat.execute();
-                }else if (move != null) {
+                } else if (move != null) {
                     move.execute();
                 }
             }
