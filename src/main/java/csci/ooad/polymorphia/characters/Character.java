@@ -8,6 +8,7 @@ import csci.ooad.polymorphia.command.Command;
 import csci.ooad.polymorphia.maze.Room;
 import csci.ooad.polymorphia.strategy.EatStrategy;
 import csci.ooad.polymorphia.strategy.FightStrategy;
+import csci.ooad.polymorphia.strategy.HumanPromptStrategy;
 import csci.ooad.polymorphia.strategy.MoveStrategy;
 
 import org.slf4j.Logger;
@@ -25,6 +26,7 @@ public class Character implements Comparable<Character> {
     private static Logger logger = LoggerFactory.getLogger(Character.class);
     private static DecimalFormat formatter = new DecimalFormat("0.0");
     protected String name;
+    private HumanPromptStrategy humanPromptStrategy;
     private FightStrategy fightStrategy;
     private EatStrategy eatStrategy;
     private MoveStrategy moveStrategy;
@@ -40,6 +42,16 @@ public class Character implements Comparable<Character> {
         this.eatStrategy = eatStrategy;
         this.moveStrategy = moveStrategy;
         this.type = type;
+    }
+
+    public Character(String name, Double initialHealth, FightStrategy fightStrategy, EatStrategy eatStrategy, MoveStrategy moveStrategy, HumanPromptStrategy humanPromptStrategy, CharacterType type) {
+        this.name = name;
+        this.health = initialHealth;
+        this.fightStrategy = fightStrategy;
+        this.eatStrategy = eatStrategy;
+        this.moveStrategy = moveStrategy;
+        this.type = type;
+        this.humanPromptStrategy = humanPromptStrategy;
     }
 
     // TODO - Make sure this is the correct way to incorporate the decorator pattern
@@ -155,20 +167,6 @@ public class Character implements Comparable<Character> {
             throw new RuntimeException(e);
         }
     }
-
-//    protected void move() {
-//        Room nextLocation = getCurrentLocation().getRandomNeighbor();
-//        if (nextLocation != null) {
-//            String message = getName() + " moved from " + getCurrentLocation().getName() + " to " + nextLocation.getName();
-//            logger.info(message);
-//            post(EventType.Moved, message);
-//            nextLocation.enter(this);
-//            loseHealth(HEALTH_LOST_IN_MOVING_ROOMS);
-//        } else {
-//            logger.warn("{} has no neighbors!", getCurrentLocation().getName());
-//        }
-//    }
-
 
     public void gainHealth(double healthValue) {
         this.health += healthValue;

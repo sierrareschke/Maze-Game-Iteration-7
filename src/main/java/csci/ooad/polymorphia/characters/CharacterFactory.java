@@ -52,7 +52,7 @@ public class CharacterFactory {
 
     public static Character createHuman(String name, Optional<Double> healthInput) {
         Double health = healthInput.orElse(DEFAULT_INITIAL_HEALTH);
-        return new Character(name, health, new HumanFightStrategy(), new HumanEatStrategy(), new DefaultMoveStrategy(), CharacterType.Human);
+        return new Character(name, health, new HumanFightStrategy(), new HumanEatStrategy(), new DefaultMoveStrategy(), new HumanPromptStrategy(), CharacterType.Human);
     }
 
     // Create many of each character type
