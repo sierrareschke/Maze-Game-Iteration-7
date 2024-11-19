@@ -2,29 +2,21 @@ package csci.ooad.polymorphia.artifacts;
 
 import csci.ooad.polymorphia.characters.Character;
 
-public class ArmorDecorator extends Character {
-    private Character character;
-    private Armor armor;
+public abstract class ArmorDecorator extends Character {
+    protected Character wrappedCharacter;
 
-    // TODO - Not sure this is how we're suppose to do this
-    public ArmorDecorator(Character character, Armor armor) {
+    public ArmorDecorator(Character character) {
         super(character);
-        this.character = character;
-        this.armor = armor;
+        this.wrappedCharacter = character;
     }
 
-    @Override
-    public String getName() {
-        return character.getName();
-    }
-
-    @Override
-    public int getHealth() {
-        return character.getHealth();
-    }
-
-    @Override
-    public int getEffectiveDefense() {
-        return character.getEffectiveDefense() + armor.getDefense();
-    }
+//    @Override
+//    public String getDescription() {
+//        return wrappedCharacter.getDescription();
+//    }
+//
+//    @Override
+//    public int fightImpact() {
+//        return wrappedCharacter.fightImpact();
+//    }
 }
