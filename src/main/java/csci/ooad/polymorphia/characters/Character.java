@@ -194,7 +194,6 @@ public class Character implements Comparable<Character> {
             if (this.type == CharacterType.Human) {
                 Optional<HumanOption> selection = this.humanPromptStrategy.prompt(this);
                 // TODO - need to make sure to only prompt/allow action if applicable (i.e. right now can eat when no food present)
-                System.out.println("Selection: " + selection);
 
                 if (selection.isPresent()) {
                     HumanOption humanOption = selection.get();
