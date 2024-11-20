@@ -113,56 +113,49 @@ public class GameConfigurator {
         int numRooms = 6; // Default number of rooms
         if (cmdLine.hasOption("r")) {
             numRooms = ((Number) cmdLine.getParsedOptionValue("r")).intValue();
-            //System.out.println("numRooms: " + numRooms);
             mazeBuilder.createFullyConnectedRooms(numRooms);
         }
 
+        int numAdventurers = 5; // Default number of adventurers
         if (cmdLine.hasOption("a")) {
-            int numAdventurers = ((Number) cmdLine.getParsedOptionValue("a")).intValue();
-            //System.out.println("numAdventurers: " + numAdventurers);
+            numAdventurers = ((Number) cmdLine.getParsedOptionValue("a")).intValue();
             mazeBuilder.createAndAddAdventurers(numAdventurers);
         }
 
+        int numCreatures = 4; // Default number of creatures
         if (cmdLine.hasOption("c")) {
-            int numCreatures = ((Number) cmdLine.getParsedOptionValue("c")).intValue();
-            //System.out.println("numCreatures: " + numCreatures);
+            numCreatures = ((Number) cmdLine.getParsedOptionValue("c")).intValue();
             mazeBuilder.createAndAddCreatures(numCreatures);
         }
 
+        int numDemons = 1; // Default number of demons
         if (cmdLine.hasOption("d")) {
-            int numDemons = ((Number) cmdLine.getParsedOptionValue("d")).intValue();
-            //System.out.println("numDemons: " + numDemons);
+            numDemons = ((Number) cmdLine.getParsedOptionValue("d")).intValue();
             mazeBuilder.createAndAddDemons(numDemons);
         }
 
-        int numFoodItems = 6;
+        int numFoodItems = 6; // default number of food items
         if (cmdLine.hasOption("f")) {
             numFoodItems = ((Number) cmdLine.getParsedOptionValue("f")).intValue();
-            //System.out.println("numFoodItems: " + numFoodItems);
             mazeBuilder.createAndAddFoodItems(numFoodItems);
         }
 
-//        int numKnights = 2;
+        int numKnights = 2; // default number of knights
         if (cmdLine.hasOption("k")) {
-            int numKnights = ((Number) cmdLine.getParsedOptionValue("m")).intValue();
-            //System.out.println("numKnights: " + numKnights);
+            numKnights = ((Number) cmdLine.getParsedOptionValue("m")).intValue();
             mazeBuilder.createAndAddKnights(numKnights);
         }
 
+        String[] armorArray = {"Platinum", "Gold"}; // default armor list
         if (cmdLine.hasOption("m")) {
             String armorList = cmdLine.getOptionValue("m");
-            String[] armorArray = armorList.split(","); // Split by commas
-            // TODO delete below and all sys out
-//            System.out.println("Armor names: ");
-//            for (String armor : armorArray) {
-//                System.out.println(armor.trim());
-//            }
+            armorArray = armorList.split(","); // Split by commas
             mazeBuilder.createAndAddArmor(String.valueOf(Arrays.asList(armorArray)));
         }
 
+        String humanPlayerName = "HumanPlayer";
         if (cmdLine.hasOption("h")) {
-            String humanPlayerName = cmdLine.getOptionValue("h");
-            //System.out.println("human name: " + humanPlayerName);
+            humanPlayerName = cmdLine.getOptionValue("h");
             mazeBuilder.createAndAddHuman(humanPlayerName);
         }
     }
