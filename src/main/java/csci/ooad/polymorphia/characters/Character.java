@@ -1,21 +1,15 @@
 package csci.ooad.polymorphia.characters;
 
-import csci.ooad.polymorphia.Die;
-import csci.ooad.polymorphia.EventBus;
-import csci.ooad.polymorphia.EventType;
-import csci.ooad.polymorphia.NoFoodException;
+import csci.ooad.polymorphia.*;
 import csci.ooad.polymorphia.command.Command;
 import csci.ooad.polymorphia.maze.Room;
-import csci.ooad.polymorphia.strategy.EatStrategy;
-import csci.ooad.polymorphia.strategy.FightStrategy;
-import csci.ooad.polymorphia.strategy.MoveStrategy;
 
+import csci.ooad.polymorphia.strategy.Strategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.text.DecimalFormat;
-
-import static csci.ooad.polymorphia.EventBus.post;
+import java.util.Optional;
 
 
 public class Character implements Comparable<Character> {
@@ -25,44 +19,22 @@ public class Character implements Comparable<Character> {
     private static Logger logger = LoggerFactory.getLogger(Character.class);
     private static DecimalFormat formatter = new DecimalFormat("0.0");
     protected String name;
-    private FightStrategy fightStrategy;
-    private EatStrategy eatStrategy;
-    private MoveStrategy moveStrategy;
+    private Strategy strategy;
     private Double health;
     private CharacterType type;
     private Room currentLocation;
 
 
-    public Character(String name, Double initialHealth, FightStrategy fightStrategy, EatStrategy eatStrategy, MoveStrategy moveStrategy, CharacterType type) {
+    public Character(String name, Double initialHealth, Strategy strategy, CharacterType type) {
         this.name = name;
         this.health = initialHealth;
-        this.fightStrategy = fightStrategy;
-        this.eatStrategy = eatStrategy;
-        this.moveStrategy = moveStrategy;
+        this.strategy = strategy;
         this.type = type;
     }
 
-    // TODO - Make sure this is the correct way to incorporate the decorator pattern
-    public Character(Character character) {
-        this.fightStrategy = character.getFightStrategy();
-        this.eatStrategy = character.getEatStrategy();
-        this.moveStrategy = character.getMoveStrategy();
-        this.health = character.getHealth();
-        this.name = character.getName();
-        this.currentLocation = character.getCurrentLocation();
-        this.type = character.type;
-    }
 
-    public EatStrategy getEatStrategy() {
-        return eatStrategy;
-    }
-
-    public FightStrategy getFightStrategy() {
-        return fightStrategy;
-    }
-
-    public MoveStrategy getMoveStrategy() {
-        return moveStrategy;
+    public Strategy getStrategy() {
+        return strategy;
     }
 
     public Room getCurrentLocation() {
@@ -116,6 +88,8 @@ public class Character implements Comparable<Character> {
         loseHealth(fightDamage);
     }
 
+    public void loseMoveDamage(double moveDamage) {loseHealth(moveDamage);}
+
     protected boolean cannotMove() {
         return getCurrentLocation().getNeighbors().isEmpty();
     }
@@ -123,6 +97,10 @@ public class Character implements Comparable<Character> {
     public Boolean isAdventurer() {
         return type == CharacterType.Adventurer;
     }
+    public Boolean isHuman(){
+        return type == CharacterType.Human;
+    }
+
     public Boolean isCreature() {
         return type == CharacterType.Creature;
     }
@@ -141,34 +119,32 @@ public class Character implements Comparable<Character> {
 
     public void doAction() {
         try {
-            Command fight = fightStrategy.fight(this);
-            Command eat = eatStrategy.eat(this);
-            Command move = moveStrategy.move(this);
-            if (fight != null) {
-                fight.execute();
-            } else if (eat != null) {
-                eat.execute();
-            }else if (move != null) {
-                move.execute();
+            // If it's a human player handle the action through prompting
+            if (this.type == CharacterType.Human) {
+                Optional<HumanOption> selection = this.strategy.prompt(this);
+                if (selection.isPresent()) {
+                    HumanOption humanOption = selection.get();
+                    if (humanOption.value() == 1) this.strategy.eat(this);
+                    if(humanOption.value() == 2) this.strategy.fight(this);
+                    if(humanOption.value() == 3) this.strategy.move(this);
+                }
+            } else {
+                // If they're a fake robot then just keep going
+                Command fight = strategy.fight(this);
+                Command eat = strategy.eat(this);
+                Command move = strategy.move(this);
+                if (fight != null) {
+                    fight.execute();
+                } else if (eat != null) {
+                    eat.execute();
+                }else if (move != null) {
+                    move.execute();
+                }
             }
         } catch (NoFoodException e) {
             throw new RuntimeException(e);
         }
     }
-
-//    protected void move() {
-//        Room nextLocation = getCurrentLocation().getRandomNeighbor();
-//        if (nextLocation != null) {
-//            String message = getName() + " moved from " + getCurrentLocation().getName() + " to " + nextLocation.getName();
-//            logger.info(message);
-//            post(EventType.Moved, message);
-//            nextLocation.enter(this);
-//            loseHealth(HEALTH_LOST_IN_MOVING_ROOMS);
-//        } else {
-//            logger.warn("{} has no neighbors!", getCurrentLocation().getName());
-//        }
-//    }
-
 
     public void gainHealth(double healthValue) {
         this.health += healthValue;

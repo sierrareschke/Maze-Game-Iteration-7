@@ -5,10 +5,9 @@ import csci.ooad.polymorphia.command.Command;
 import csci.ooad.polymorphia.command.CommandFactory;
 import csci.ooad.polymorphia.maze.Room;
 
-public class CowardFightStrategy implements FightStrategy {
-
+public class CowardStrategy extends Strategy{
     @Override
-    public Command fight(Character coward) {
+    Command fight(Character coward){
         Room currentRoom = coward.getCurrentLocation();
         Boolean cannotMove = currentRoom.getNeighbors().isEmpty();
         Boolean isDemonPresent = currentRoom.hasDemon();
@@ -19,4 +18,5 @@ public class CowardFightStrategy implements FightStrategy {
             return null;
         }
     }
+
 }

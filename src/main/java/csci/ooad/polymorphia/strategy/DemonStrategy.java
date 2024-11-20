@@ -1,12 +1,15 @@
 package csci.ooad.polymorphia.strategy;
 
 import csci.ooad.polymorphia.characters.Character;
-import csci.ooad.polymorphia.maze.Room;
-
 import csci.ooad.polymorphia.command.Command;
 import csci.ooad.polymorphia.command.CommandFactory;
 
-public class DemonFightStrategy implements FightStrategy {
+public class DemonStrategy extends Strategy {
+
+    @Override
+    Command eat(Character character){
+        return null;
+    }
 
     @Override
     public Command fight(Character demon) {
@@ -17,4 +20,5 @@ public class DemonFightStrategy implements FightStrategy {
             return null;
         }
     }
+
 }

@@ -27,23 +27,9 @@ public class MoveCommand implements Command {
             logger.info(message);
             post(EventType.Moved, message);
             nextLocation.enter(character);
-            character.loseHealth(CHARACTER_HEALTH_LOST_IN_MOVING_ROOMS);
+            character.loseMoveDamage(CHARACTER_HEALTH_LOST_IN_MOVING_ROOMS);
         } else {
             logger.warn("{} has no neighbors!", character.getCurrentLocation().getName());
         }
     }
 }
-
-
-/*    protected void move() {
-        Room nextLocation = getCurrentLocation().getRandomNeighbor();
-        if (nextLocation != null) {
-            String message = getName() + " moved from " + getCurrentLocation().getName() + " to " + nextLocation.getName();
-            logger.info(message);
-            post(EventType.Moved, message);
-            nextLocation.enter(this);
-            loseHealth(HEALTH_LOST_IN_MOVING_ROOMS);
-        } else {
-            logger.warn("{} has no neighbors!", getCurrentLocation().getName());
-        }
-    }*/

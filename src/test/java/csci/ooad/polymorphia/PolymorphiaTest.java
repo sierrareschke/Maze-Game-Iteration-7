@@ -1,5 +1,5 @@
 package csci.ooad.polymorphia;
-import csci.ooad.polymorphia.artifacts.FoodFactory;
+import csci.ooad.polymorphia.artifacts.ArtifactFactory;
 import csci.ooad.polymorphia.characters.Character;
 import csci.ooad.polymorphia.characters.CharacterFactory;
 
@@ -132,7 +132,7 @@ public class PolymorphiaTest {
 
     @Test
     void testUseOfFactories() throws NoSuchRoomException {
-        Maze maze = Maze.getNewBuilder(new CharacterFactory(), new FoodFactory())
+        Maze maze = Maze.getNewBuilder(new CharacterFactory(), new ArtifactFactory())
                 .createRoom("initial")
                 .createAndAddAdventurers("Frodo")
                 .createAndAddKnights("Sir Galahad")
@@ -148,6 +148,25 @@ public class PolymorphiaTest {
         assertTrue(maze.hasDemon());
         assertTrue(maze.hasCoward());
         assertTrue(maze.getRoom("initial").hasFood());
+    }
+
+    @Test
+    void testMazeWithHuman() throws NoSuchRoomException {
+        Maze maze = Maze.getNewBuilder(new CharacterFactory(), new ArtifactFactory())
+                .create3x3Grid()
+                .distributeRandomly()
+                .createAndAddHuman("Human")
+                .createAndAddKnights("Sir Galahad")
+                .createAndAddGluttons("Chubs")
+                .createAndAddCowards("Sir Robin")
+                .createAndAddCreatures("Ogre")
+                .createAndAddFoodItems("Popcorn")
+                .build();
+
+        Polymorphia game = new Polymorphia(maze);
+        game.play();
+
+        assertTrue(game.isOver());
     }
 
     @Test

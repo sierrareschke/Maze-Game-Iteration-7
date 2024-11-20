@@ -23,77 +23,76 @@ public class CharacterFactory {
 
     public static Character createAdventurer(String name, Optional<Double> healthInput) {
         Double health = healthInput.orElse(DEFAULT_INITIAL_HEALTH);
-        return new Character(name, health, new AdventurerFightStrategy(), new DefaultEatStrategy(), new DefaultMoveStrategy(), CharacterType.Adventurer);
+        return new Character(name, health, new AdventurerStrategy(), CharacterType.Adventurer);
     }
 
     public static Character createKnight(String name, Optional<Double> healthInput) {
         Double health = healthInput.orElse(DEFAULT_INITIAL_HEALTH);
-        return new Character(name, health, new KnightFightStrategy(), new DefaultEatStrategy(), new DefaultMoveStrategy(), CharacterType.Knight);
+        return new Character(name, health, new KnightStrategy(), CharacterType.Knight);
     }
 
     public static Character createGlutton(String name) {
-        return new Character(name, DEFAULT_INITIAL_HEALTH, new GluttonFightStrategy(), new GluttonEatStrategy(), new DefaultMoveStrategy(), CharacterType.Glutton);
+        return new Character(name, DEFAULT_INITIAL_HEALTH, new GluttonStrategy(), CharacterType.Glutton);
     }
 
     public static Character createCoward(String name, Optional<Double> healthInput) {
         Double health = healthInput.orElse(DEFAULT_INITIAL_HEALTH);
-        return new Character(name, health, new CowardFightStrategy(), new DefaultEatStrategy(), new DefaultMoveStrategy(), CharacterType.Coward);
+        return new Character(name, health, new CowardStrategy(), CharacterType.Coward);
     }
 
     public static Character createDemon(String name) {
-        return new Character(name, DEMON_INITIAL_HEALTH, new DemonFightStrategy(), new DemonEatStrategy(), new DefaultMoveStrategy(), CharacterType.Demon);
+        return new Character(name, DEMON_INITIAL_HEALTH, new DemonStrategy(), CharacterType.Demon);
     }
 
     public static Character createCreature(String name, Optional<Double> healthInput) {
         Double health = healthInput.orElse(CREATURE_INITIAL_HEALTH);
-        return new Character(name, health, new CreatureFightStrategy(), new CreatureEatStrategy(), new NoMoveStrategy(), CharacterType.Creature);
+        return new Character(name, health, new CreatureStrategy(), CharacterType.Creature);
         //return new Character(name, character -> new NoOpCommand()); // "Do nothing" for non-Demon creatures
     }
-
-    public static Character createHuman(String name, Optional<Double> healthInput) {
-        Double health = healthInput.orElse(DEFAULT_INITIAL_HEALTH);
-        return new Character(name, health, new HumanFightStrategy(), new HumanEatStrategy(), new DefaultMoveStrategy(), CharacterType.Human);
+    public static Character createHuman(String name) {
+        Double health = DEFAULT_INITIAL_HEALTH;
+        return new Character(name, health, new HumanStrategy(), CharacterType.Human);
     }
 
     // Create many of each character type
     public static List<Character> createNumberOfAdventurers(int numAdventurers) {
         return IntStream.range(0, numAdventurers)
-                .mapToObj(i -> new Character(ADVENTURER_NAMES[i % ADVENTURER_NAMES.length], DEFAULT_INITIAL_HEALTH, new AdventurerFightStrategy(), new DefaultEatStrategy(), new DefaultMoveStrategy(), CharacterType.Adventurer))
+                .mapToObj(i -> new Character(ADVENTURER_NAMES[i % ADVENTURER_NAMES.length], DEFAULT_INITIAL_HEALTH, new AdventurerStrategy(), CharacterType.Adventurer))
                 .map(Character.class::cast)
                 .toList();
     }
 
     public static List<Character> createNumberOfKnights(int numAdventurers) {
         return IntStream.range(0, numAdventurers)
-                .mapToObj(i -> new Character(KNIGHT_NAMES[i % KNIGHT_NAMES.length], DEFAULT_INITIAL_HEALTH, new KnightFightStrategy(), new DefaultEatStrategy(), new DefaultMoveStrategy(), CharacterType.Knight))
+                .mapToObj(i -> new Character(KNIGHT_NAMES[i % KNIGHT_NAMES.length], DEFAULT_INITIAL_HEALTH, new KnightStrategy(), CharacterType.Knight))
                 .map(Character.class::cast)
                 .toList();
     }
 
     public static List<Character> createNumberOfGluttons(int numAdventurers) {
         return IntStream.range(0, numAdventurers)
-                .mapToObj(i -> new Character(GLUTTON_NAMES[i % GLUTTON_NAMES.length], DEFAULT_INITIAL_HEALTH, new GluttonFightStrategy(), new GluttonEatStrategy(), new DefaultMoveStrategy(), CharacterType.Glutton))
+                .mapToObj(i -> new Character(GLUTTON_NAMES[i % GLUTTON_NAMES.length], DEFAULT_INITIAL_HEALTH, new GluttonStrategy(), CharacterType.Glutton))
                 .map(Character.class::cast)
                 .toList();
     }
 
     public static List<Character> createNumberOfCowards(int numAdventurers) {
         return IntStream.range(0, numAdventurers)
-                .mapToObj(i -> new Character(COWARD_NAMES[i % COWARD_NAMES.length], DEFAULT_INITIAL_HEALTH, new CowardFightStrategy(), new DefaultEatStrategy(), new DefaultMoveStrategy(), CharacterType.Coward))
+                .mapToObj(i -> new Character(COWARD_NAMES[i % COWARD_NAMES.length], DEFAULT_INITIAL_HEALTH, new CowardStrategy(), CharacterType.Coward))
                 .map(Character.class::cast)
                 .toList();
     }
 
     public static List<Character> createNumberOfCreatures(int numCharacters) {
         return IntStream.range(0, numCharacters)
-                .mapToObj(i -> new Character(CREATURE_NAMES[i % CREATURE_NAMES.length], CREATURE_INITIAL_HEALTH, new CreatureFightStrategy(), new CreatureEatStrategy(), new DefaultMoveStrategy(), CharacterType.Creature))
+                .mapToObj(i -> new Character(CREATURE_NAMES[i % CREATURE_NAMES.length], CREATURE_INITIAL_HEALTH, new CreatureStrategy(), CharacterType.Creature))
                 .map(Character.class::cast)
                 .toList();
     }
 
     public static List<Character> createNumberOfDemons(int numCharacters) {
         return IntStream.range(0, numCharacters)
-                .mapToObj(i -> new Character(DEMON_NAMES[i % DEMON_NAMES.length], DEMON_INITIAL_HEALTH, new DemonFightStrategy(), new DemonEatStrategy(), new DefaultMoveStrategy(), CharacterType.Demon))
+                .mapToObj(i -> new Character(DEMON_NAMES[i % DEMON_NAMES.length], DEMON_INITIAL_HEALTH, new DemonStrategy(), CharacterType.Demon))
                 .map(Character.class::cast)
                 .toList();
     }

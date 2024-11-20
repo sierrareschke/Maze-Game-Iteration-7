@@ -5,7 +5,7 @@ import csci.ooad.polymorphia.command.Command;
 import csci.ooad.polymorphia.command.CommandFactory;
 import csci.ooad.polymorphia.maze.Room;
 
-public class KnightFightStrategy implements FightStrategy {
+public class KnightStrategy extends Strategy {
 
     @Override
     public Command fight(Character knight) {
@@ -18,5 +18,9 @@ public class KnightFightStrategy implements FightStrategy {
             return null;
         }
     }
-}
 
+    @Override
+    public Command wearArmor(Character knight) {
+        return CommandFactory.createWearArmorCommand(knight);
+    }
+}

@@ -13,6 +13,7 @@ repositories {
 dependencies {
     implementation 'ch.qos.logback:logback-classic:1.4.14'
     implementation 'commons-cli:commons-cli:1.6.0'
+    implementation 'org.apache.groovy:groovy:4.0.23'
 
 
     // Maze display

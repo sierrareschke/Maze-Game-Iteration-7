@@ -19,8 +19,8 @@ public class CommandFactory {
         return new FightCommand(character, opponent);
     }
 
-    public static Command createNoCommand(){
-        return new NoCommand();
+    public static Command createWearArmorCommand(Character character) {
+        return new WearArmorCommand(character);
     }
 
 
