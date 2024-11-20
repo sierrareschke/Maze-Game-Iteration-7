@@ -3,19 +3,13 @@ package csci.ooad.polymorphia.characters;
 import csci.ooad.polymorphia.*;
 import csci.ooad.polymorphia.command.Command;
 import csci.ooad.polymorphia.maze.Room;
-
 import csci.ooad.polymorphia.strategy.Strategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.text.DecimalFormat;
 import java.util.Optional;
 
-
 public class Character implements Comparable<Character> {
-    static Double DEFAULT_INITIAL_HEALTH = 5.0;
-    static Double HEALTH_LOST_IN_FIGHT_REGARDLESS_OF_OUTCOME = 0.5;
-    static Double HEALTH_LOST_IN_MOVING_ROOMS = 0.25;
     private static Logger logger = LoggerFactory.getLogger(Character.class);
     private static DecimalFormat formatter = new DecimalFormat("0.0");
     protected String name;
@@ -141,6 +135,47 @@ public class Character implements Comparable<Character> {
                     move.execute();
                 }
             }
+            // If it's a human player, handle the action through prompting
+            if (this.type == CharacterType.Human) {
+                Optional<HumanOption> selection = this.strategy.prompt(this);
+                // TODO - need to make sure to only prompt/allow action if applicable (i.e. right now can eat when no food present)
+
+                if (selection.isPresent()) {
+                    HumanOption humanOption = selection.get();
+                    Command command = null;
+
+                    // Determine the command based on the selected option
+                    if (humanOption.value() == 1) {
+                        command = this.strategy.eat(this);
+                    } else if (humanOption.value() == 2) {
+                        command = this.strategy.fight(this);
+                    } else if (humanOption.value() == 3) {
+                        command = this.strategy.move(this);
+                    } else if (humanOption.value() == 4) {
+                        command = this.strategy.wearArmor(this);
+                    }
+
+                    // Execute the command if it is not null
+                    if (command != null) {
+                        command.execute();
+                    } else {
+                        System.out.println("No valid action could be performed for the selected option.");
+                    }
+                }
+            } else {
+                // For non-human characters, execute strategies directly
+                Command fight = strategy.fight(this);
+                Command eat = strategy.eat(this);
+                Command move = strategy.move(this);
+
+                if (fight != null) {
+                    fight.execute();
+                } else if (eat != null) {
+                    eat.execute();
+                } else if (move != null) {
+                    move.execute();
+                }
+            }
         } catch (NoFoodException e) {
             throw new RuntimeException(e);
         }
@@ -152,4 +187,7 @@ public class Character implements Comparable<Character> {
     }
 
 
+    public CharacterType getType() {
+        return type;
+    }
 }

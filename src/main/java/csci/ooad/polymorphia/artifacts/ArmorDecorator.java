@@ -1,12 +1,15 @@
 package csci.ooad.polymorphia.artifacts;
 
 import csci.ooad.polymorphia.characters.Character;
+import csci.ooad.polymorphia.characters.CharacterType;
+import csci.ooad.polymorphia.strategy.Strategy;
 
 public class ArmorDecorator extends Character {
     protected Character wrappedCharacter;
+    protected String armorName;
 
     public ArmorDecorator(Character character) {
-        super(character.getName(), character.getFightStrategy(), character.getMoveStrategy(), character.getEatStrategy());
+        super(character.getName(), character.getHealth(), character.getStrategy(), character.getType());
         this.wrappedCharacter = character;
     }
 

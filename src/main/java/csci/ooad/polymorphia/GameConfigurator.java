@@ -32,6 +32,15 @@ public class GameConfigurator {
     }
 
     static Options getOptions() {
+        Option numRooms = Option.builder("r")
+                .longOpt("numberOfRooms")
+                .argName("numRooms")
+                .hasArg()
+                .numberOfArgs(1)
+                .type(Number.class)
+                .desc("the number of rooms in the maze")
+                .build();
+
         Option numAdventurers = Option.builder("a")
                 .longOpt("numberOfAdventurers")
                 .argName("numAdventurers")
@@ -40,7 +49,6 @@ public class GameConfigurator {
                 .type(Number.class)
                 .desc("the number of adventurers to place in the maze")
                 .build();
-
 
         Option numCreatures = Option.builder("c")
                 .longOpt("numberOfCreatures")
@@ -51,7 +59,6 @@ public class GameConfigurator {
                 .desc("the number of creatures to place in the maze")
                 .build();
 
-
         Option numDemons = Option.builder("d")
                 .longOpt("numberOfDemons")
                 .argName("numDemons")
@@ -60,7 +67,6 @@ public class GameConfigurator {
                 .numberOfArgs(1)
                 .desc("the number of demons to place in the maze")
                 .build();
-
 
         Option numFoodItems = Option.builder("f")
                 .longOpt("numberOfFoodItems")
@@ -71,6 +77,14 @@ public class GameConfigurator {
                 .desc("the number of food items to place in the maze")
                 .build();
 
+        Option armoredSuits = Option.builder("m")
+                .longOpt("armoredSuits")
+                .argName("armorList")
+                .hasArg()
+                .numberOfArgs(1)
+                .type(String.class)
+                .desc("a comma-separated list of armored suit names")
+                .build();
 
         Option humanPlayer = Option.builder("h")
                 .longOpt("humanPlayer")
@@ -81,34 +95,13 @@ public class GameConfigurator {
                 .desc("the human player's name")
                 .build();
 
-
-        Option armoredSuits = Option.builder("m")
-                .longOpt("armoredSuits")
-                .argName("armorList")
-                .hasArg()
-                .numberOfArgs(1)
-                .type(String.class)
-                .desc("a comma-separated list of armored suit names")
-                .build();
-
-
-        Option numRooms = Option.builder("r")
-                .longOpt("numberOfRooms")
-                .argName("numRooms")
-                .hasArg()
-                .numberOfArgs(1)
-                .type(Number.class)
-                .desc("the number of rooms in the maze")
-                .build();
-
-
         Options options = new Options();
         options.addOption(numAdventurers);
         options.addOption(numCreatures);
         options.addOption(numDemons);
         options.addOption(numFoodItems);
         options.addOption(humanPlayer);
-        // options.addOption(numArmoredSuits);
+        options.addOption(armoredSuits);
         options.addOption(numRooms);
 
 
@@ -123,42 +116,47 @@ public class GameConfigurator {
             mazeBuilder.createFullyConnectedRooms(numRooms);
         }
 
+        int numAdventurers = 5; // Default number of adventurers
         if (cmdLine.hasOption("a")) {
-            int numAdventurers = ((Number) cmdLine.getParsedOptionValue("a")).intValue();
+            numAdventurers = ((Number) cmdLine.getParsedOptionValue("a")).intValue();
             mazeBuilder.createAndAddAdventurers(numAdventurers);
         }
 
+        int numCreatures = 4; // Default number of creatures
         if (cmdLine.hasOption("c")) {
-            int numCreatures = ((Number) cmdLine.getParsedOptionValue("c")).intValue();
+            numCreatures = ((Number) cmdLine.getParsedOptionValue("c")).intValue();
             mazeBuilder.createAndAddCreatures(numCreatures);
         }
 
+        int numDemons = 1; // Default number of demons
         if (cmdLine.hasOption("d")) {
-            int numDemons = ((Number) cmdLine.getParsedOptionValue("d")).intValue();
+            numDemons = ((Number) cmdLine.getParsedOptionValue("d")).intValue();
             mazeBuilder.createAndAddDemons(numDemons);
         }
 
-        int numFoodItems = 6;
+        int numFoodItems = 6; // default number of food items
         if (cmdLine.hasOption("f")) {
             numFoodItems = ((Number) cmdLine.getParsedOptionValue("f")).intValue();
             mazeBuilder.createAndAddFoodItems(numFoodItems);
         }
 
-//        int numKnights = 2;
-        if (cmdLine.hasOption("m")) {
-            int numKnights = ((Number) cmdLine.getParsedOptionValue("m")).intValue();
+        int numKnights = 2; // default number of knights
+        if (cmdLine.hasOption("k")) {
+            numKnights = ((Number) cmdLine.getParsedOptionValue("m")).intValue();
             mazeBuilder.createAndAddKnights(numKnights);
         }
 
+        String[] armorArray = {"Platinum", "Gold"}; // default armor list
         if (cmdLine.hasOption("m")) {
             String armorList = cmdLine.getOptionValue("m");
-            String[] armorArray = armorList.split(","); // Split by commas
+            armorArray = armorList.split(","); // Split by commas
             mazeBuilder.createAndAddArmor(String.valueOf(Arrays.asList(armorArray)));
         }
 
+        String humanPlayerName = "HumanPlayer";
         if (cmdLine.hasOption("h")) {
-            String humanPlayerName = cmdLine.getOptionValue("h");
-            mazeBuilder.createAndAddAdventurers(humanPlayerName); // TODO - is human player an adventurer ?
+            humanPlayerName = cmdLine.getOptionValue("h");
+            mazeBuilder.createAndAddHuman(humanPlayerName);
         }
     }
 

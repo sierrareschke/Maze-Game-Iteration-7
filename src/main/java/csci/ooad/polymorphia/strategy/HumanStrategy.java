@@ -1,4 +1,5 @@
 package csci.ooad.polymorphia.strategy;
+
 import csci.ooad.polymorphia.HumanOption;
 import csci.ooad.polymorphia.artifacts.Food;
 import csci.ooad.polymorphia.characters.Character;
@@ -6,12 +7,12 @@ import csci.ooad.polymorphia.command.Command;
 import csci.ooad.polymorphia.command.CommandFactory;
 import csci.ooad.polymorphia.maze.Room;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class HumanStrategy extends Strategy {
+
     @Override
     public Optional<HumanOption> prompt(Character character) {
         System.out.print("You are in room " + character.getCurrentLocation() + "\n\n");
@@ -25,7 +26,7 @@ public class HumanStrategy extends Strategy {
             System.out.print("Enter your option: ");
             Scanner scanner = new Scanner(System.in);
 
-            int choiceNumber = Integer.parseInt(scanner.nextLine()) - 1;
+            int choiceNumber = Integer.parseInt(scanner.nextLine());
             return options.stream()
                     .filter(option -> option.value() == choiceNumber)
                     .findFirst();
@@ -40,7 +41,6 @@ public class HumanStrategy extends Strategy {
         Character creature = currentRoom.getHealthiestCreature();
         return CommandFactory.createFightCommand(human, creature);
     }
-
     @Override
     public Command eat(Character character) {
         Room room = character.getCurrentLocation();

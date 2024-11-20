@@ -16,7 +16,7 @@ public class GluttonStrategy extends Strategy {
         if (!foodItems.isEmpty()) {
             return CommandFactory.createEatCommand(character);
         }
-        return CommandFactory.createNoCommand();
+        return null;
     }
 
     @Override

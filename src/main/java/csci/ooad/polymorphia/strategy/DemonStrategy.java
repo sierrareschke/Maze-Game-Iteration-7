@@ -7,7 +7,7 @@ import csci.ooad.polymorphia.command.CommandFactory;
 public class DemonStrategy extends Strategy {
 
     @Override
-    Command eat(Character character){
+    public Command eat(Character character){
         return null;
     }
 
