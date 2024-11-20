@@ -10,11 +10,10 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 public class CharacterFactory {
-    //////////////////////////////////////////// new below
     static final Double DEFAULT_INITIAL_HEALTH = 5.0;
     static final Double CREATURE_INITIAL_HEALTH = 3.0;
     static final Double DEMON_INITIAL_HEALTH = 15.0;
-    public static String[] ADVENTURER_NAMES = new String[]{"Frodo", "Arwen", "Nikhil", "Sierra", "Matt", "Fran"};
+    public static String[] ADVENTURER_NAMES = new String[]{"Frodo", "Arwen", "Nikhil", "Matt", "Fran"};
     public static String[] KNIGHT_NAMES = new String[]{"Sir Lancelot", "Lady Brienne", "King Arthur", "Sir Jamey", "Aragorn", "Isildur"};
     public static String[] COWARD_NAMES = new String[]{"Sir Robin", "Sir Scaredy Cat", "Lady Faints-a-lot", "Lady Runaway", "Sir Chicken", "Lady Hides-a-lot"};
     public static String[] GLUTTON_NAMES = new String[]{"Sir Eats-a-lot", "Sir Gobbles", "Lady Munches", "Lady Snacks", "Sir Nibbles", "Lady Noshes"};
