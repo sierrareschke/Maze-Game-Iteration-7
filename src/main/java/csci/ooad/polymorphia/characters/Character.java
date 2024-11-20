@@ -2,6 +2,7 @@ package csci.ooad.polymorphia.characters;
 
 import csci.ooad.polymorphia.*;
 import csci.ooad.polymorphia.command.Command;
+import csci.ooad.polymorphia.command.CommandFactory;
 import csci.ooad.polymorphia.maze.Room;
 import csci.ooad.polymorphia.strategy.Strategy;
 import org.slf4j.Logger;
@@ -153,13 +154,16 @@ public class Character implements Comparable<Character> {
                         command = this.strategy.move(this);
                     } else if (humanOption.value() == 4) {
                         command = this.strategy.wearArmor(this);
-                    }
+                    } else if (humanOption.value() == 5) {
+                        command = null;
+                }
 
                     // Execute the command if it is not null
                     if (command != null) {
                         command.execute();
                     } else {
-                        System.out.println("No valid action could be performed for the selected option.");
+                        logger.info("No valid action could be performed for the selected option. Please try again");
+                        this.doAction();
                     }
                 }
             } else {

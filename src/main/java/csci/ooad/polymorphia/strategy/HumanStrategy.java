@@ -17,7 +17,7 @@ public class HumanStrategy extends Strategy {
     public Optional<HumanOption> prompt(Character character) {
         System.out.print("You are in room " + character.getCurrentLocation() + "\n\n");
 
-        List<HumanOption> options = List.of(HumanOption.EAT, HumanOption.FIGHT, HumanOption.MOVE, HumanOption.DO_NOTHING);
+        List<HumanOption> options = List.of(HumanOption.EAT, HumanOption.FIGHT, HumanOption.MOVE, HumanOption.PUT_ON_ARMOR, HumanOption.DO_NOTHING);
         for (HumanOption option : options) {
             System.out.println(option.value() + ": " + option.name());
         }
@@ -34,12 +34,13 @@ public class HumanStrategy extends Strategy {
 
     }
 
-
     @Override
     public Command fight(Character human) {
         Room currentRoom = human.getCurrentLocation();
         Character creature = currentRoom.getHealthiestCreature();
-        return CommandFactory.createFightCommand(human, creature);
+        if(creature != null) {
+            return CommandFactory.createFightCommand(human, creature);
+        } else return null;
     }
     @Override
     public Command eat(Character character) {
