@@ -31,7 +31,15 @@ Grace Ohlsen, Sierra Reschke and Nolan Brady
 #### Java Version: 21
 
 #### Comments/Assumptions: 
--- TODO --
+Command line arguments for human-playable game:
+--numberOfRooms 9 
+--numberOfAdventurers 4 
+--numberOfCreatures 5 
+--numberOfDemons 1 
+--numberOfFoodItems 5 
+--numberOfArmor 4  
+--humanPlayer "Sierra Reschke"
+
 
 
 ## Test Coverage

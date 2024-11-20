@@ -23,7 +23,7 @@ public class CharacterFactory {
 
     public static Character createAdventurer(String name, Optional<Double> healthInput) {
         Double health = healthInput.orElse(DEFAULT_INITIAL_HEALTH);
-        return new Character(name, health, new AdventurerStrategy(), CharacterType.Adventurer);
+        return new Character(name, health, new RandomStrategy(), CharacterType.Adventurer);
     }
 
     public static Character createKnight(String name, Optional<Double> healthInput) {
