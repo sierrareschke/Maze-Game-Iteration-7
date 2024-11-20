@@ -206,9 +206,9 @@ public class Character implements Comparable<Character> {
                         command = this.fightStrategy.fight(this);
                     } else if (humanOption.value() == 3) {
                         command = this.moveStrategy.move(this);
+                    } else if (humanOption.value() == 4) {
+                        command = this.armorStrategy.wear(this);
                     }
-                    // TODO - add option to put on armor
-
 
                     // Execute the command if it is not null
                     if (command != null) {

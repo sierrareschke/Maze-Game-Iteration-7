@@ -10,7 +10,6 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 public class CharacterFactory {
-    //////////////////////////////////////////// new below
     static final Double DEFAULT_INITIAL_HEALTH = 5.0;
     static final Double CREATURE_INITIAL_HEALTH = 3.0;
     static final Double DEMON_INITIAL_HEALTH = 15.0;
