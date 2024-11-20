@@ -31,7 +31,7 @@ Grace Ohlsen, Sierra Reschke and Nolan Brady
 #### Java Version: 21
 
 #### Comments/Assumptions: 
--- TODO --
+* We assumed the Knight picked up armor if there was no creature in the room. 
 
 
 ## Test Coverage

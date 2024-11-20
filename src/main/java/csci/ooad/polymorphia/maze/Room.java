@@ -48,18 +48,22 @@ public class Room {
 
     public List<Character> getLivingCreatures() {
         return characters.stream()
-                .filter(Character::isCreature)
-                .filter(Character::isAlive)
-                .map(Character.class::cast)
-                .sorted()
-                .toList();
+                .filter(character -> character.isDemon() || character.isCreature()) // Check for demons or creatures
+                .filter(Character::isAlive) // Check if alive
+                .map(Character.class::cast) // Cast if necessary
+                .sorted() // Assuming Character implements Comparable
+                .toList(); // Collect as a list
     }
+
 
     public List<String> getContents() {
         List<String> contents = new ArrayList<>(getLivingCharacters().stream()
                 .map(Object::toString)
                 .toList());
         contents.addAll(this.foodItems.stream()
+                .map(Object::toString)
+                .toList());
+        contents.addAll(this.armor.stream()
                 .map(Object::toString)
                 .toList());
         return unmodifiableList(contents);

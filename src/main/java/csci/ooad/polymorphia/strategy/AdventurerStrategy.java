@@ -13,10 +13,9 @@ public class AdventurerStrategy extends Strategy {
     @Override
     public Command fight(csci.ooad.polymorphia.characters.Character adventurer) {
         Room currentRoom = adventurer.getCurrentLocation();
-        Boolean creatureInRoomWithMe = currentRoom.hasLivingCreatures();
-        Boolean iAmHealthiestInRoom = currentRoom.getHealthiestAdventurer() == adventurer;
-        if (creatureInRoomWithMe && iAmHealthiestInRoom) {
-            Character creature = currentRoom.getHealthiestCreature();
+        Character creature = currentRoom.getHealthiestCreature();
+        boolean iAmHealthiestInRoom = currentRoom.getHealthiestAdventurer() == adventurer;
+        if (creature != null && iAmHealthiestInRoom) {
             return CommandFactory.createFightCommand(adventurer, creature);
         } else {
             return null;

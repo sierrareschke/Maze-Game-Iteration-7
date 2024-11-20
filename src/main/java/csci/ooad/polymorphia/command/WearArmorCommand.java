@@ -18,7 +18,10 @@ public class WearArmorCommand implements Command {
         Room room = character.getCurrentLocation();
         if (!room.getArmor().isEmpty()) {
             room.getArmor().remove(0); // Remove armor from the room
-            character = new ArmorDecorator(character);   // Wrap character in armor
+            Character wrappedCharacter = new ArmorDecorator(character);   // Wrap character in armor
+            room.remove(character);
+            room.add(wrappedCharacter);
+            character = wrappedCharacter;
         }
     }
 }
