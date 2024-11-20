@@ -3,12 +3,14 @@ package csci.ooad.polymorphia;
 import csci.ooad.polymorphia.maze.Maze;
 import org.apache.commons.cli.*;
 import org.apache.commons.cli.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Arrays;
 
 public class GameConfigurator {
+    private static final Logger logger = LoggerFactory.getLogger(GameConfigurator.class);
     static int SECONDS_TO_PAUSE_BETWEEN_TURNS = 1;
-
-
     private final Maze.Builder mazeBuilder;
 
 
@@ -25,7 +27,7 @@ public class GameConfigurator {
             GameConfigurator gameConfig = new GameConfigurator(cmdLine);
             gameConfig.createAndStartGame();
         } catch (ParseException e) {
-            System.err.println("Error parsing command-line arguments: " + e.getMessage()); // TODO delete sys out
+            logger.error("Error parsing command-line arguments: {}", e.getMessage());
             System.exit(1); // error
         }
         System.exit(0);
