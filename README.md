@@ -46,7 +46,7 @@ Command line arguments for human-playable game:
 --humanPlayer "Sierra Reschke"
 * Since testing human input or related functionality is prohibitive we left those methods uncovered in our tests. This includes methods outside of HumanStrategy that are designed to handle the prompting or logic surrounding that interation.
 * Files involves are: Character, HumanStrategy, Strategy, and GameConfigurator.
-
+* loseFightDamage (the method missing from ArmorDecorator) also shows as being uncovered but is covered in the test in ArmorTest.java. We're not sure why it isn't registering as covered.
 * See below for example output of game play, demonstrating move, eat, fight, and wear armor options and their corresponding logger outputs and health modifications
 
 ## Test Coverage
