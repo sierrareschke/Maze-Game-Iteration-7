@@ -11,7 +11,7 @@ class ArmorTest {
     @Test
     void testArmorCreation() {
         Armor armor = new Armor("Bronze");
-        String name = armor.name();
-        assertTrue(name.equals("Bronze"));
+        String name = armor.toString();
+        assertTrue(name.equals("Bronze armor"));
     }
 }

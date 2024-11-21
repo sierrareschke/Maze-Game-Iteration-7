@@ -19,6 +19,10 @@ public class GameConfigurator {
         buildMazeFromArguments(cmdLine);
     }
 
+    public GameConfigurator(Maze.Builder mazeBuilderMock) {
+        mazeBuilder = mazeBuilderMock;
+    }
+
 
     public static void main(String[] args) throws ParseException {
         CommandLineParser parser = new DefaultParser();

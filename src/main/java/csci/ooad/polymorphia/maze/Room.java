@@ -1,7 +1,6 @@
 package csci.ooad.polymorphia.maze;
 
 import csci.ooad.polymorphia.Die;
-import csci.ooad.polymorphia.NoArmorException;
 import csci.ooad.polymorphia.artifacts.Armor;
 import csci.ooad.polymorphia.artifacts.Food;
 import csci.ooad.polymorphia.NoFoodException;

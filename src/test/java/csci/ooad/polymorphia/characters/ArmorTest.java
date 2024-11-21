@@ -8,6 +8,8 @@ import csci.ooad.polymorphia.maze.Maze;
 import csci.ooad.polymorphia.maze.Room;
 import org.apache.commons.cli.CommandLine;
 import org.junit.jupiter.api.BeforeEach;
+
+import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
@@ -78,5 +80,36 @@ public class ArmorTest {
         // Now fight the Ogre with two sets of Armor
         Command fightCommand = CommandFactory.createFightCommand(doublyArmoredKnight, ogre);
         fightCommand.execute();
+    }
+
+    @Test
+    void loseFightDamage() {
+        ArtifactFactory artifactFactory = new ArtifactFactory();
+
+        Character knight = characterFactory.createKnight("Knight", Optional.empty());
+        Armor bronzeArmor = artifactFactory.createArmor("Bronze");
+        Armor steelArmor = artifactFactory.createArmor("Steel");
+
+
+        Maze maze = Maze.getNewBuilder().createFullyConnectedRooms("Adventurer Room", "Another Armor Room", "Ogre Room")
+                .addToRoom("Adventurer Room", knight)
+                .addToRoom("Adventurer Room", bronzeArmor)
+                .addToRoom("Another Armor Room", steelArmor)
+                .createAndAddArmor(2)
+                .build();
+
+        Command wearArmor = CommandFactory.createWearArmorCommand(knight);
+        wearArmor.execute();
+
+        Double initialHealth = knight.getHealth();
+        knight.loseFightDamage(2);
+
+        assertEquals(initialHealth-2,knight.getHealth());
+    }
+
+    @Test
+    void testCreateArmorList(){
+        List<Armor> list = artifactFactory.createNumArmor(4);
+        assertEquals(4, list.size());
     }
 }
