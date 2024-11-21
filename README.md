@@ -83,6 +83,7 @@ All of this can be achieved through functional decomposition of more complicated
 
 
 ### Example game output demonstrating eat, move, fight, and wear armor commands
+```agsl
 The game has started.
 Polymorphia Polymorphia Game 1 after turn 0
 # of live adventurers: 5
@@ -611,3 +612,4 @@ Endersteel Leggings armor
 4: Put on armor
 5: Do Nothing
 Enter your option: 
+```
