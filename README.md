@@ -31,7 +31,10 @@ Grace Ohlsen, Sierra Reschke and Nolan Brady
 #### Java Version: 21
 
 #### Comments/Assumptions: 
+Assumptions:
 * We assumed the Knight picked up armor if there was no creature in the room. 
+* All options will be printed for each human turn; however, the option will only be executed if it is a viable option
+* The command line arguments passed to initialize the game will have letters corresponding to those in getOptions
 
 Command line arguments for human-playable game:
 --numberOfRooms 9 
