@@ -32,6 +32,7 @@ Grace Ohlsen, Sierra Reschke and Nolan Brady
 
 #### Comments/Assumptions: 
 * We assumed the Knight picked up armor if there was no creature in the room. 
+
 Command line arguments for human-playable game:
 --numberOfRooms 9 
 --numberOfAdventurers 4 
@@ -41,6 +42,7 @@ Command line arguments for human-playable game:
 --numberOfArmor 4  
 --humanPlayer "Sierra Reschke"
 
+* See below for example output of game play, demonstrating move, eat, fight, and wear armor options and their corresponding logger outputs and health modifications
 
 
 ## Test Coverage
@@ -79,3 +81,533 @@ All of this can be achieved through functional decomposition of more complicated
 * Use the Command Pattern to return the action to execute from the Strategy Pattern classes (20 points)
 * Use the Factory Pattern to create the Command objects (5 points)
 
+
+### Example game output demonstrating eat, move, fight, and wear armor commands
+The game has started.
+Polymorphia Polymorphia Game 1 after turn 0
+# of live adventurers: 5
+# of live creatures: 6
+	Goblin's Fountain:
+		Dragon(health: 3)
+
+	Dragon's Den:
+		Arwen(health: 5)
+		Ogre(health: 3)
+		Sierra Reschke(health: 5)
+		Endersteel Leggings armor
+
+	Troll Bridge:
+		Matt(health: 5)
+		Obsidian Shield armor
+
+	Dungeon:
+		Frodo(health: 5)
+		Satan(health: 15)
+
+	Pit of Despair:
+		Orc(health: 3)
+		salad(1.2)
+
+	Sanctuary:
+		Nikhil(health: 5)
+		Shelob(health: 3)
+		cupcake(1.7)
+		steak(1.3)
+		Blazeborn Helm armor
+
+	Den of Souls:
+		Troll(health: 3)
+
+	Map Room:
+		apple(1.4)
+		banana(1.1)
+
+	Fangorn Forest:
+		Netherite Chestplate armor
+Starting play...
+Frodo(health: 5) is fighting Satan(health: 15)
+Frodo(health: 5) rolled 2
+Satan(health: 15) rolled 5
+FightOutcome: Satan won a battle against Frodo
+Satan(health: 14.5) is fighting Frodo(health: 1.5)
+Satan(health: 14.5) rolled 3
+Frodo(health: 1.5) rolled 2
+FightOutcome: Satan won a battle against Frodo
+Frodo just died!
+Nikhil(health: 5) is fighting Shelob(health: 3)
+Nikhil(health: 5) rolled 4
+Shelob(health: 3) rolled 6
+FightOutcome: Shelob won a battle against Nikhil
+Matt moved from Troll Bridge to Fangorn Forest
+Moved: Matt moved from Troll Bridge to Fangorn Forest
+You are in room 	Dragon's Den:
+Arwen(health: 5)
+Ogre(health: 3)
+Sierra Reschke(health: 5)
+Endersteel Leggings armor
+
+1: Eat
+2: Fight
+3: Move
+4: Put on armor
+5: Do Nothing
+Enter your option: 3
+Sierra Reschke moved from Dragon's Den to Den of Souls
+Moved: Sierra Reschke moved from Dragon's Den to Den of Souls
+Arwen(health: 5) is fighting Ogre(health: 3)
+Arwen(health: 5) rolled 2
+Ogre(health: 3) rolled 5
+FightOutcome: Ogre won a battle against Arwen
+Polymorphia Polymorphia Game 1 after turn 1
+# of live adventurers: 4
+# of live creatures: 6
+	Goblin's Fountain:
+		Dragon(health: 3)
+
+	Dragon's Den:
+		Arwen(health: 1.5)
+		Ogre(health: 2.5)
+		Endersteel Leggings armor
+
+	Troll Bridge:
+		Obsidian Shield armor
+
+	Dungeon:
+		Satan(health: 14)
+
+	Pit of Despair:
+		Orc(health: 3)
+		salad(1.2)
+
+	Sanctuary:
+		Nikhil(health: 2.5)
+		Shelob(health: 2.5)
+		cupcake(1.7)
+		steak(1.3)
+		Blazeborn Helm armor
+
+	Den of Souls:
+		Troll(health: 3)
+		Sierra Reschke(health: 4.75)
+
+	Map Room:
+		apple(1.4)
+		banana(1.1)
+
+	Fangorn Forest:
+		Matt(health: 4.75)
+		Netherite Chestplate armor
+Satan moved from Dungeon to Den of Souls
+Moved: Satan moved from Dungeon to Den of Souls
+Nikhil(health: 2.5) is fighting Shelob(health: 2.5)
+Nikhil(health: 2.5) rolled 5
+Shelob(health: 2.5) rolled 6
+FightOutcome: Shelob won a battle against Nikhil
+Arwen(health: 1.5) is fighting Ogre(health: 2.5)
+Arwen(health: 1.5) rolled 2
+Ogre(health: 2.5) rolled 6
+FightOutcome: Ogre won a battle against Arwen
+Arwen just died!
+Matt moved from Fangorn Forest to Goblin's Fountain
+Moved: Matt moved from Fangorn Forest to Goblin's Fountain
+You are in room 	Den of Souls:
+Troll(health: 3)
+Sierra Reschke(health: 4.75)
+Satan(health: 13.75)
+
+1: Eat
+2: Fight
+3: Move
+4: Put on armor
+5: Do Nothing
+Enter your option: 2
+Sierra Reschke(health: 4.75) is fighting Satan(health: 13.75)
+Sierra Reschke(health: 4.75) rolled 6
+Satan(health: 13.75) rolled 3
+FightOutcome: Sierra Reschke won a battle against Satan
+Polymorphia Polymorphia Game 1 after turn 2
+# of live adventurers: 3
+# of live creatures: 6
+	Goblin's Fountain:
+		Dragon(health: 3)
+		Matt(health: 4.5)
+
+	Dragon's Den:
+		Ogre(health: 2)
+		Endersteel Leggings armor
+
+	Troll Bridge:
+		Obsidian Shield armor
+
+	Dungeon:
+		
+
+	Pit of Despair:
+		Orc(health: 3)
+		salad(1.2)
+
+	Sanctuary:
+		Nikhil(health: 1)
+		Shelob(health: 2)
+		cupcake(1.7)
+		steak(1.3)
+		Blazeborn Helm armor
+
+	Den of Souls:
+		Troll(health: 3)
+		Sierra Reschke(health: 4.25)
+		Satan(health: 10.25)
+
+	Map Room:
+		apple(1.4)
+		banana(1.1)
+
+	Fangorn Forest:
+		Netherite Chestplate armor
+You are in room 	Den of Souls:
+Troll(health: 3)
+Sierra Reschke(health: 4.25)
+Satan(health: 10.25)
+
+1: Eat
+2: Fight
+3: Move
+4: Put on armor
+5: Do Nothing
+Enter your option: 3
+Sierra Reschke moved from Den of Souls to Troll Bridge
+Moved: Sierra Reschke moved from Den of Souls to Troll Bridge
+Satan moved from Den of Souls to Sanctuary
+Moved: Satan moved from Den of Souls to Sanctuary
+Nikhil(health: 1) is fighting Satan(health: 10)
+Nikhil(health: 1) rolled 5
+Satan(health: 10) rolled 1
+FightOutcome: Nikhil won a battle against Satan
+Matt(health: 4.5) is fighting Dragon(health: 3)
+Matt(health: 4.5) rolled 6
+Dragon(health: 3) rolled 3
+FightOutcome: Matt won a battle against Dragon
+Dragon just died!
+Polymorphia Polymorphia Game 1 after turn 3
+# of live adventurers: 3
+# of live creatures: 5
+	Goblin's Fountain:
+		Matt(health: 4)
+
+	Dragon's Den:
+		Ogre(health: 2)
+		Endersteel Leggings armor
+
+	Troll Bridge:
+		Sierra Reschke(health: 4)
+		Obsidian Shield armor
+
+	Dungeon:
+		
+
+	Pit of Despair:
+		Orc(health: 3)
+		salad(1.2)
+
+	Sanctuary:
+		Nikhil(health: 0.5)
+		Shelob(health: 2)
+		Satan(health: 5.5)
+		cupcake(1.7)
+		steak(1.3)
+		Blazeborn Helm armor
+
+	Den of Souls:
+		Troll(health: 3)
+
+	Map Room:
+		apple(1.4)
+		banana(1.1)
+
+	Fangorn Forest:
+		Netherite Chestplate armor
+Nikhil(health: 0.5) is fighting Satan(health: 5.5)
+Nikhil(health: 0.5) rolled 5
+Satan(health: 5.5) rolled 2
+FightOutcome: Nikhil won a battle against Satan
+Nikhil just died!
+Matt moved from Goblin's Fountain to Fangorn Forest
+Moved: Matt moved from Goblin's Fountain to Fangorn Forest
+Satan moved from Sanctuary to Dungeon
+Moved: Satan moved from Sanctuary to Dungeon
+You are in room 	Troll Bridge:
+Sierra Reschke(health: 4)
+Obsidian Shield armor
+
+1: Eat
+2: Fight
+3: Move
+4: Put on armor
+5: Do Nothing
+Enter your option: 4
+Polymorphia Polymorphia Game 1 after turn 4
+# of live adventurers: 2
+# of live creatures: 5
+	Goblin's Fountain:
+		
+
+	Dragon's Den:
+		Ogre(health: 2)
+		Endersteel Leggings armor
+
+	Troll Bridge:
+		Sierra Reschke wearing armor(health: 4)
+
+	Dungeon:
+		Satan(health: 1.75)
+
+	Pit of Despair:
+		Orc(health: 3)
+		salad(1.2)
+
+	Sanctuary:
+		Shelob(health: 2)
+		cupcake(1.7)
+		steak(1.3)
+		Blazeborn Helm armor
+
+	Den of Souls:
+		Troll(health: 3)
+
+	Map Room:
+		apple(1.4)
+		banana(1.1)
+
+	Fangorn Forest:
+		Matt(health: 3.75)
+		Netherite Chestplate armor
+Matt moved from Fangorn Forest to Troll Bridge
+Moved: Matt moved from Fangorn Forest to Troll Bridge
+You are in room 	Troll Bridge:
+Sierra Reschke wearing armor(health: 4)
+Matt(health: 3.5)
+
+1: Eat
+2: Fight
+3: Move
+4: Put on armor
+5: Do Nothing
+Enter your option: 3
+Sierra Reschke wearing armor moved from Troll Bridge to Sanctuary
+Moved: Sierra Reschke wearing armor moved from Troll Bridge to Sanctuary
+Satan moved from Dungeon to Troll Bridge
+Moved: Satan moved from Dungeon to Troll Bridge
+Polymorphia Polymorphia Game 1 after turn 5
+# of live adventurers: 2
+# of live creatures: 5
+	Goblin's Fountain:
+		
+
+	Dragon's Den:
+		Ogre(health: 2)
+		Endersteel Leggings armor
+
+	Troll Bridge:
+		Matt(health: 3.5)
+		Satan(health: 1.5)
+
+	Dungeon:
+		
+
+	Pit of Despair:
+		Orc(health: 3)
+		salad(1.2)
+
+	Sanctuary:
+		Shelob(health: 2)
+		Sierra Reschke wearing armor(health: 4)
+		cupcake(1.7)
+		steak(1.3)
+		Blazeborn Helm armor
+
+	Den of Souls:
+		Troll(health: 3)
+
+	Map Room:
+		apple(1.4)
+		banana(1.1)
+
+	Fangorn Forest:
+		Netherite Chestplate armor
+You are in room 	Sanctuary:
+Shelob(health: 2)
+Sierra Reschke wearing armor(health: 4)
+cupcake(1.7)
+steak(1.3)
+Blazeborn Helm armor
+
+1: Eat
+2: Fight
+3: Move
+4: Put on armor
+5: Do Nothing
+Enter your option: 1
+Sierra Reschke wearing armor gained health: 5.68
+AteSomething: Sierra Reschke wearing armor just ate cupcake
+Satan(health: 1.5) is fighting Matt(health: 3.5)
+Satan(health: 1.5) rolled 5
+Matt(health: 3.5) rolled 5
+FightOutcome: Satan tied in a battle against Matt
+Matt(health: 3) is fighting Satan(health: 1)
+Matt(health: 3) rolled 3
+Satan(health: 1) rolled 1
+FightOutcome: Matt won a battle against Satan
+Satan just died!
+Polymorphia Polymorphia Game 1 after turn 6
+# of live adventurers: 2
+# of live creatures: 4
+	Goblin's Fountain:
+		
+
+	Dragon's Den:
+		Ogre(health: 2)
+		Endersteel Leggings armor
+
+	Troll Bridge:
+		Matt(health: 2.5)
+
+	Dungeon:
+		
+
+	Pit of Despair:
+		Orc(health: 3)
+		salad(1.2)
+
+	Sanctuary:
+		Shelob(health: 2)
+		Sierra Reschke wearing armor(health: 5.68)
+		steak(1.3)
+		Blazeborn Helm armor
+
+	Den of Souls:
+		Troll(health: 3)
+
+	Map Room:
+		apple(1.4)
+		banana(1.1)
+
+	Fangorn Forest:
+		Netherite Chestplate armor
+You are in room 	Sanctuary:
+Shelob(health: 2)
+Sierra Reschke wearing armor(health: 5.68)
+steak(1.3)
+Blazeborn Helm armor
+
+1: Eat
+2: Fight
+3: Move
+4: Put on armor
+5: Do Nothing
+Enter your option: 3
+Sierra Reschke wearing armor moved from Sanctuary to Dragon's Den
+Moved: Sierra Reschke wearing armor moved from Sanctuary to Dragon's Den
+Matt moved from Troll Bridge to Pit of Despair
+Moved: Matt moved from Troll Bridge to Pit of Despair
+Polymorphia Polymorphia Game 1 after turn 7
+# of live adventurers: 2
+# of live creatures: 4
+	Goblin's Fountain:
+		
+
+	Dragon's Den:
+		Ogre(health: 2)
+		Sierra Reschke wearing armor(health: 5.68)
+		Endersteel Leggings armor
+
+	Troll Bridge:
+		
+
+	Dungeon:
+		
+
+	Pit of Despair:
+		Orc(health: 3)
+		Matt(health: 2.25)
+		salad(1.2)
+
+	Sanctuary:
+		Shelob(health: 2)
+		steak(1.3)
+		Blazeborn Helm armor
+
+	Den of Souls:
+		Troll(health: 3)
+
+	Map Room:
+		apple(1.4)
+		banana(1.1)
+
+	Fangorn Forest:
+		Netherite Chestplate armor
+Matt(health: 2.25) is fighting Orc(health: 3)
+Matt(health: 2.25) rolled 2
+Orc(health: 3) rolled 5
+FightOutcome: Orc won a battle against Matt
+Matt just died!
+You are in room 	Dragon's Den:
+Ogre(health: 2)
+Sierra Reschke wearing armor(health: 5.68)
+Endersteel Leggings armor
+
+1: Eat
+2: Fight
+3: Move
+4: Put on armor
+5: Do Nothing
+Enter your option: 2
+Sierra Reschke wearing armor(health: 5.68) is fighting Ogre(health: 2)
+Sierra Reschke wearing armor(health: 5.68) rolled 4
+Ogre(health: 2) rolled 5
+FightOutcome: Ogre won a battle against Sierra Reschke wearing armor
+Polymorphia Polymorphia Game 1 after turn 8
+# of live adventurers: 1
+# of live creatures: 4
+	Goblin's Fountain:
+		
+
+	Dragon's Den:
+		Ogre(health: 1.5)
+		Sierra Reschke wearing armor(health: 5.18)
+		Endersteel Leggings armor
+
+	Troll Bridge:
+		
+
+	Dungeon:
+		
+
+	Pit of Despair:
+		Orc(health: 2.5)
+		salad(1.2)
+
+	Sanctuary:
+		Shelob(health: 2)
+		steak(1.3)
+		Blazeborn Helm armor
+
+	Den of Souls:
+		Troll(health: 3)
+
+	Map Room:
+		apple(1.4)
+		banana(1.1)
+
+	Fangorn Forest:
+		Netherite Chestplate armor
+You are in room 	Dragon's Den:
+Ogre(health: 1.5)
+Sierra Reschke wearing armor(health: 5.18)
+Endersteel Leggings armor
+
+1: Eat
+2: Fight
+3: Move
+4: Put on armor
+5: Do Nothing
+Enter your option: 
