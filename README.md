@@ -44,12 +44,13 @@ Command line arguments for human-playable game:
 --numberOfFoodItems 5 
 --numberOfArmor 4  
 --humanPlayer "Sierra Reschke"
+* Since testing human input or related functionality is prohibitive we left those methods uncovered in our tests. This includes methods outside of HumanStrategy that are designed to handle the prompting or logic surrounding that interation.
+* Files involves are: Character, HumanStrategy, Strategy, and GameConfigurator.
 
 * See below for example output of game play, demonstrating move, eat, fight, and wear armor options and their corresponding logger outputs and health modifications
 
-
 ## Test Coverage
-![](homework_7_tests.png)
+![](homework_8_test.png)
 
 ## Grading Rubric:
 

@@ -1,0 +1,39 @@
+	Northwest:
+		
+
+	Northeast:
+		Frodo(health: 5)
+
+	Southwest:
+		
+
+	Southeast:
+		Ogre(health: 3)	Northwest:
+		Dragon(health: 3)
+		banana(1.6)
+
+	North:
+		steak(1.5)
+
+	Northeast:
+		
+
+	West:
+		
+
+	Center:
+		Ogre(health: 3)
+
+	East:
+		cupcake(1.3)
+
+	Southwest:
+		Frodo(health: 5)
+
+	South:
+		Human(health: 5)
+		apple(2.0)
+		salad(1.1)
+
+	Southeast:
+		
