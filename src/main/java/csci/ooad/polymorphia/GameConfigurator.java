@@ -80,11 +80,11 @@ public class GameConfigurator {
                 .build();
 
         Option armoredSuits = Option.builder("m")
-                .longOpt("armoredSuits")
-                .argName("armorList")
+                .longOpt("numberOfArmor")
+                .argName("numArmor")
                 .hasArg()
                 .numberOfArgs(1)
-                .type(String.class)
+                .type(Number.class)
                 .desc("a comma-separated list of armored suit names")
                 .build();
 
@@ -144,15 +144,14 @@ public class GameConfigurator {
 
         int numKnights = 2; // default number of knights
         if (cmdLine.hasOption("k")) {
-            numKnights = ((Number) cmdLine.getParsedOptionValue("m")).intValue();
+            numKnights = ((Number) cmdLine.getParsedOptionValue("k")).intValue();
             mazeBuilder.createAndAddKnights(numKnights);
         }
 
-        String[] armorArray = {"Platinum", "Gold"}; // default armor list
+        int numArmor = 2;
         if (cmdLine.hasOption("m")) {
-            String armorList = cmdLine.getOptionValue("m");
-            armorArray = armorList.split(","); // Split by commas
-            mazeBuilder.createAndAddArmor(String.valueOf(Arrays.asList(armorArray)));
+            numArmor = ((Number) cmdLine.getParsedOptionValue("m")).intValue();
+            mazeBuilder.createAndAddArmor(numArmor);
         }
 
         String humanPlayerName = "HumanPlayer";

@@ -26,7 +26,7 @@ public class ArtifactFactory {
                 .toList();
     }
 
-    public List<Armor> createNumArmors(Integer numArmor) {
+    public List<Armor> createNumArmor(Integer numArmor) {
         return IntStream.range(0,numArmor)
                 .mapToObj(i -> new Armor(ARMOR_NAMES[i % ARMOR_NAMES.length]))
                 .map(Armor.class::cast)

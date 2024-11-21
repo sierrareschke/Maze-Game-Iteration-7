@@ -31,6 +31,7 @@ Grace Ohlsen, Sierra Reschke and Nolan Brady
 #### Java Version: 21
 
 #### Comments/Assumptions: 
+* We assumed the Knight picked up armor if there was no creature in the room. 
 Command line arguments for human-playable game:
 --numberOfRooms 9 
 --numberOfAdventurers 4 

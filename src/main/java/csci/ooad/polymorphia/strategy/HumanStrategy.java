@@ -54,4 +54,9 @@ public class HumanStrategy extends Strategy {
             return null; // CommandFactory.createMoveCommand(character);
         }
     }
+
+    @Override
+    public Command wearArmor(Character knight) {
+        return CommandFactory.createWearArmorCommand(knight);
+    }
 }

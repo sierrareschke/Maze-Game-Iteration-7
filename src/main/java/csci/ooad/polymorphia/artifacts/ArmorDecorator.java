@@ -6,7 +6,6 @@ import csci.ooad.polymorphia.strategy.Strategy;
 
 public class ArmorDecorator extends Character {
     protected Character wrappedCharacter;
-    protected String armorName;
 
     public ArmorDecorator(Character character) {
         super(character.getName(), character.getHealth(), character.getStrategy(), character.getType());
@@ -29,7 +28,7 @@ public class ArmorDecorator extends Character {
 
     @Override
     public String getName() {
-        return wrappedCharacter.getName();
+        return wrappedCharacter.getName() + " wearing armor";
     }
 
     // Delegate all other methods to the wrappedCharacter
