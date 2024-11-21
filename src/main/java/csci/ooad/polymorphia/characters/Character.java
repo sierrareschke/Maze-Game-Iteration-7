@@ -11,8 +11,8 @@ import java.text.DecimalFormat;
 import java.util.Optional;
 
 public class Character implements Comparable<Character> {
-    private static Logger logger = LoggerFactory.getLogger(Character.class);
     private static final DecimalFormat formatter = new DecimalFormat("#.##");
+    private static Logger logger = LoggerFactory.getLogger(Character.class);
     protected String name;
     private Strategy strategy;
     private Double health;
@@ -124,7 +124,7 @@ public class Character implements Comparable<Character> {
                     if(humanOption.value() == 2) command = this.strategy.fight(this);
                     if(humanOption.value() == 3) command = this.strategy.move(this);
                     if(humanOption.value() == 4) command = this.strategy.wearArmor(this);
-                    if(humanOption.value() == 5) command = this.strategy.doNothing();
+                    if(humanOption.value() == 5) command = null;
 
                     if(command != null){
                         command.execute();

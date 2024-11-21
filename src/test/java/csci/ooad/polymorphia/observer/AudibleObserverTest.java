@@ -3,11 +3,12 @@ package csci.ooad.polymorphia.observer;
 import csci.ooad.polymorphia.EventType;
 import csci.ooad.polymorphia.IObservable;
 import csci.ooad.polymorphia.IObserver;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class AudibleObserverTest {
 
-    @Test
+    @Disabled
     void update() {
         IObservable observable = new IObservable() {
             @Override

@@ -35,8 +35,4 @@ public abstract class Strategy {
     public Optional<HumanOption> prompt(Character character) {
         return Optional.empty();
     }
-
-    public Command doNothing(){
-        return null;
-    }
 }

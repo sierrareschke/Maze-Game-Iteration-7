@@ -39,7 +39,7 @@ public class Room {
 
     public List<Character> getLivingAdventurers() {
         return characters.stream()
-                .filter(Character::isAdventurer)
+                .filter(character -> character.isAdventurer() || character.isCoward() || character.isKnight() || character.isGlutton() || character.isHuman())
                 .filter(Character::isAlive)
                 .map(Character.class::cast)
                 .sorted()
@@ -163,13 +163,6 @@ public class Room {
             throw new NoFoodException("No food in room");
         }
         return foodItems.removeFirst();
-    }
-
-    public Armor removeArmor() {
-        if(armor.isEmpty()) {
-            throw new NoArmorException("No armor in room");
-        }
-        return armor.removeFirst();
     }
 
     public Boolean hasDemon() {

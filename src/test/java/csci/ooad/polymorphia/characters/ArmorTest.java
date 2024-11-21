@@ -18,6 +18,7 @@ public class ArmorTest {
     Character joe;
     CharacterFactory characterFactory = new CharacterFactory();
     ArtifactFactory artifactFactory = new ArtifactFactory();
+
     @BeforeEach
     void setUp() {
         Double initialHealth = 5.0;
@@ -30,54 +31,52 @@ public class ArmorTest {
 
 
         // Arrange - put creature in room with adventurer
-        Character bilbo = characterFactory.createAdventurer("Bilbo", Optional.empty());
+        Character knight = characterFactory.createKnight("Knight", Optional.empty());
         Character ogre = characterFactory.createCreature("Ogre", Optional.empty());
         Armor bronzeArmor = artifactFactory.createArmor("Bronze");
         Armor steelArmor = artifactFactory.createArmor("Steel");
 
 
-        Maze maze = Maze.getNewBuilder()
-                .createFullyConnectedRooms("Adventurer Room", "Another Armor Room", "Ogre Room")
-                .addToRoom("Adventurer Room", bilbo)
+        Maze maze = Maze.getNewBuilder().createFullyConnectedRooms("Adventurer Room", "Another Armor Room", "Ogre Room")
+                .addToRoom("Adventurer Room", knight)
                 .addToRoom("Adventurer Room", bronzeArmor)
                 .addToRoom("Another Armor Room", steelArmor)
                 .addToRoom("Ogre Room", ogre)
                 .build();
 
 
-        Command wearArmor = CommandFactory.createWearArmorCommand(bilbo);
+        Command wearArmor = CommandFactory.createWearArmorCommand(knight);
         wearArmor.execute();
 
 
         // Get the armored adventurer
         assertEquals(1, maze.getLivingAdventurers().size());
-        Character armoredBilbo = maze.getLivingAdventurers().getFirst();
+        Character armoredKnight = maze.getLivingAdventurers().getFirst();
 
 
-        System.out.println("armoredBilbo: " + armoredBilbo);
-        assertTrue(armoredBilbo.toString().contains("armor"));
+        System.out.println("armoredKnight: " + armoredKnight);
+        assertTrue(armoredKnight.toString().contains("armor"));
 
 
-        Command moveCommand = CommandFactory.createMoveCommand(armoredBilbo);
+        Command moveCommand = CommandFactory.createMoveCommand(armoredKnight);
         moveCommand.execute();
         assertEquals(1, maze.getLivingAdventurers().size());
 
-        Command wearSecondArmor = CommandFactory.createWearArmorCommand(armoredBilbo);
+        Command wearSecondArmor = CommandFactory.createWearArmorCommand(armoredKnight);
         wearSecondArmor.execute();
         assertEquals(1, maze.getLivingAdventurers().size());
 
 
-        Character doublyArmoredBilbo = maze.getLivingAdventurers().getFirst();
-        System.out.println("doublyArmoredBilbo: " + doublyArmoredBilbo);
+        Character doublyArmoredKnight = maze.getLivingAdventurers().getFirst();
+        System.out.println("doublyArmoredBilbo: " + doublyArmoredKnight);
 
 
         Room ogreRoom = maze.getRoom("Ogre Room");
-        ogreRoom.enter(doublyArmoredBilbo);
+        ogreRoom.enter(doublyArmoredKnight);
 
 
         // Now fight the Ogre with two sets of Armor
-        Command fightCommand = CommandFactory.createFightCommand(doublyArmoredBilbo, ogre);
+        Command fightCommand = CommandFactory.createFightCommand(doublyArmoredKnight, ogre);
         fightCommand.execute();
     }
-
 }

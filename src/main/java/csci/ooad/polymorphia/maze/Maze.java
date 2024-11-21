@@ -322,13 +322,6 @@ public class Maze {
             return this;
         }
 
-        public Builder createAndAddArmor(String... armorNames) {
-            for(String armorName : armorNames) {
-                nextRoom().add(artifactFactory.createArmor(armorName));
-            }
-            return this;
-        }
-
         public Builder createAndAddArmor(Integer numArmor){
             List<Armor> armor = artifactFactory.createNumArmor(numArmor);
             for(Armor armorItem : armor) {

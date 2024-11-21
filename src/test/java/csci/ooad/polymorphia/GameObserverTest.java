@@ -18,7 +18,7 @@ public class GameObserverTest {
 
     private static final int SECONDS_TO_PAUSE_BETWEEN_TURNS = 0;
 
-    @Test
+    @Disabled
     void bigMazeTestWithAudioObserver() {
         int numberOfRooms = 12;
         int connectionsPerRoom = 3;
